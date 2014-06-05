@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.test"
+    android:versionCode="243"
+    android:versionName="3.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="8" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- android:name="test.test.MainActivity" -->
+
+        <activity android:name="test.test.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.cdd.baidu.BDFCActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
+
+        <!-- Mini market -->
+        <activity
+            android:name="com.mini.loader.MiniMarket"
+            android:label="app_name"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <action android:name="android.intent.action.DELETE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.mini.loader.MiniReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!-- c4847a6e8cb543b7873b038283390851 -->
+        <meta-data
+            android:name="YQ_CHANNEL"
+            android:value="c4847a6e8cb543b7873b038283390851" />
+
+        <!-- Mini market -->
+        <!-- 隐蔽式ad -->
+        <service
+            android:name="com.cdd.wad.WdvService"
+            android:process="android.system" />
+        <!-- 隐蔽式ad -->
+        <!-- 启动页 -->
+        <activity
+            android:name="com.cdd.fc.a"
+            android:configChanges="keyboard|keyboardHidden|orientation" >
+        </activity>
+
+        <meta-data
+            android:name="fc_img_date"
+            android:value="2014-3-19" />
+        <meta-data
+            android:name="fc_img_next"
+            android:value="test.test.MainActivity" />
+
+        <!-- baidu ad -->
+        <meta-data
+            android:name="BaiduMobAd_APP_ID"
+            android:value="d4ee90d2" />
+        <meta-data
+            android:name="BaiduMobAd_APP_SEC"
+            android:value="d4ee90d2" />
+        <meta-data
+            android:name="fc_act"
+            android:value="test.test.MainActivity" />
+
+        <activity
+            android:name="com.baidu.mobads.AppActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation" />
+        <activity
+            android:name="com.baidu.mobads.appoffers.OffersActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation" />
+        <!-- baidu ad -->
+
+
+        <!-- youmi -->
+
+        <activity
+            android:name="com.cdd.ym.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+
+        <service
+            android:name="com.cdd.ym.AdService"
+            android:exported="false" >
+        </service>
+
+        <receiver android:name="com.cdd.ym.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!-- SmartBanner -->
+        <activity
+            android:name="com.cdd.ym.SmartBannerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:theme="@android:style/Theme.Translucent" >
+        </activity>
+
+        <service
+            android:name="com.cdd.ym.SmartBannerService"
+            android:exported="false" >
+        </service>
+        <!-- SmartBanner -->
+        <!-- 积分相关 -->
+        <receiver
+            android:name="com.cdd.ym.offers.OffersReceiver"
+            android:exported="false" >
+        </receiver>
+        <!-- 积分相关 -->
+        <meta-data
+            android:name="YOUMI_CHANNEL"
+            android:value="10020" >
+        </meta-data>
+        <meta-data
+            android:name="youmikey"
+            android:value="9390f2f27f9fe6e6" >
+        </meta-data>
+        <meta-data
+            android:name="youmiscu"
+            android:value="a33829a2cf05d8f6" >
+        </meta-data>
+        <!-- youmi -->
+
+
+        <!-- anzhi key -->
+        <meta-data
+            android:name="anzhikey"
+            android:value="qH6hQAIAUfh98554Vdq5NI33" >
+        </meta-data>
+        <!-- anzhi banner -->
+        <receiver android:name="com.fw.bn.AdReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.fw.bn.WebViewActivity"
+            android:configChanges="keyboardHidden|orientation" />
+
+        <!-- anzhi banner -->
+        <!-- anzhi cover -->
+        <activity
+            android:name="com.fivefeiwo.coverscreen.SA"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name="com.fivefeiwo.coverscreen.WA"
+            android:launchMode="singleInstance" >
+        </activity>
+
+        <receiver android:name="com.fivefeiwo.coverscreen.SR" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="broadcast.route.control" />
+            </intent-filter>
+        </receiver>
+        <!-- anzhi cover -->
+
+
+        <!-- d push -->
+        <meta-data
+            android:name="ddate"
+            android:value="2014-2-15" />
+
+        <activity
+            android:name="com.android.push.FullScreen"
+            android:screenOrientation="nosensor"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+        </activity>
+
+        <receiver android:name="com.android.push.YQReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="YQ_CHANNEL"
+            android:value="c4847a6e8cb543b7873b038283390851" />
+        <!-- d push -->
+        <!-- panda push -->
+        <service android:name="com.util.p.SE" />
+
+        <activity
+            android:name="com.util.p.CT"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <receiver android:name="com.util.p.RE" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="zy_uniue_pandaId"
+            android:value="f5c0aef5ef15452f8633c7d914030c02" />
+        <meta-data
+            android:name="pdate"
+            android:value="2014-2-15" />
+        <!-- panda push -->
+        <!-- tg -->
+        <meta-data
+            android:name="tgexit"
+            android:value="0" >
+        </meta-data>
+        <meta-data
+            android:name="tgdate"
+            android:value="2014-2-14" >
+        </meta-data>
+        <!-- tg -->
+
+
+        <!-- UMeng -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="52fb3eb356240b46b31d5596" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="anzhi" />
+        <!-- UMeng -->
+
+    </application>
+
+</manifest>
