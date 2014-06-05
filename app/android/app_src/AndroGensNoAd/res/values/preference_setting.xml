@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="Emulation">Emulation</string>
+    <string name="Frameskip">Frameskip</string>
+    <string name="Autosave_Autoload">Autosave/Autoload</string>
+    <string name="Autosave_Autoload_summary">Uses state save to prevent loss of game</string>
+    <string name="Audio">Audio</string>
+    <string name="Sound_Rate">Sound Sample Rate</string>
+    <string name="Graphics">Graphics</string>
+    <string name="Maintain_Ratio">Maintain Aspect Ratio</string>
+    <string name="Hardware_Filtering">Hardware Filtering</string>
+    <string name="Input">Input</string>
+    <string name="Configure_Input">Configure Touch Input</string>
+    <string name="Modify_input">Modify input location/size</string>
+    <string name="Show_Input">Show Touch Input</string>
+    <string name="Configure_Key_Input">Configure Key Input</string>
+    <string name="Configure_Key_Input_sumy">Bind keyboard keys to emulator input</string>
+    <string name="Reset_Input">Reset Input</string>
+    <string name="Reset_default">Reset to default</string>
+    <string name="Directories">Directories</string>
+    <string name="Select_ROM_Dir">Select ROM Dir</string>
+    <string name="Select_ROM_Dir_sumy">ROM DIR: </string>
+
+</resources>

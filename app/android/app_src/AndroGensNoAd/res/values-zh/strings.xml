@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">世嘉MD模拟器</string>
+    <string name="app_description">世嘉MD</string>
+    <string name="loadRomButtonLabel">载入游戏</string>
+    <string name="resumeButtonLabel">继续</string>
+    <string name="aboutButtonLabel">关于</string>
+    <string name="exitButtonLabel">退出</string>
+    <string name="rateButtonLabel">评价</string>
+    <string name="gameButtonLabel">游戏Roms</string>
+    <string name="settingButtonLabel">设置</string>
+    <string name="Copyright">Copyright 2012 - DroidHits / MDPlay</string>
+    <string name="submit">提交</string>
+    <string name="admob_id">a1535711c02b135</string>
+    <string name="title">解压</string>
+    <string name="message">请耐心等待几分钟,解压目录为 /sdcard/Genesis/roms/</string>
+    <string name="ok">解压</string>
+    <string name="cancel">取消</string>
+    <string name="waiting">正在解压....</string>
+    <string name="no_file">游戏包未找到,请通过Google play重新下载. </string>
+    <string name="sucess">解压成功</string>
+    <string name="failed">解压失败!</string>
+    <string name="text_paused_cellular">Would you like to enable downloading over cellular connections? Depending on your data plan, this may cost you money.</string>
+    <string name="text_paused_cellular_2">If you choose not to enable downloading over cellular connections, the download will automatically resume when wi-fi is available.</string>
+    <string name="text_button_resume_cellular">Resume download</string>
+    <string name="text_button_wifi_settings">Wi-Fi settings</string>
+    <string name="text_verifying_download">Verifying Download</string>
+    <string name="text_validation_complete">XAPK File Validation Complete.  Select OK to start the movie.</string>
+    <string name="text_validation_failed">XAPK File Validation Failed.</string>
+    <string name="text_button_pause">Pause Download</string>
+    <string name="text_button_resume">Resume Download</string>
+    <string name="text_button_cancel">Cancel</string>
+    <string name="text_button_cancel_verify">Cancel Verification</string>
+
+</resources>

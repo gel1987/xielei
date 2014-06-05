@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">安全支付</string>
+    <string name="title_activity_demo_main">安全支付</string>
+    <string name="channel">100081</string>
+    <string name="subchannel">121</string>
+    
+    <string name="slientlogin">静默登陆</string>
+    <string name="pay">热心捐赠</string>
+    <string name="result">捐赠结果</string>
+    <string name="sdk_name">支付5元,有意者请点击热心捐赠.</string>
+    
+</resources>

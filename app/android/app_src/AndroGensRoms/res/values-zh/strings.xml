@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MD游戏Rom</string>
+    <string name="title">解压</string>
+    <string name="message">所有游戏将解压到 /sdcard/Genesis/roms/</string>
+    <string name="ok">解压</string>
+    <string name="cancel">取消</string>
+    <string name="waiting">解压中,请等待几分钟....</string>
+    <string name="no_file">游戏Rom文件被删除,请卸载后再次到Google Play安装. </string>
+    <string name="sucess">解压成功!</string>
+    <string name="failed">解压失败,请重试!</string>
+
+</resources>

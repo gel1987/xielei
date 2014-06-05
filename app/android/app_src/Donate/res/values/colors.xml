@@ -1,0 +1,5 @@
+<resources>
+    <color name="black_overlay">#66000000</color>
+    <color name="btn_normal">#a1ffffff</color>
+    <color name="btn_pressed">#bbb</color>
+</resources>

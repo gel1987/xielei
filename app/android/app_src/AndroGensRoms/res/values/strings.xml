@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Genesis(MD) Roms</string>
+    <string name="title">unzip</string>
+    <string name="message">unzip all game will use few minutes.\nGame Folder is /sdcard/Genesis/roms/</string>
+    <string name="ok">unzip</string>
+    <string name="cancel">Cancel</string>
+    <string name="waiting">unziping....</string>
+    <string name="no_file">Games Zip File Not Found,Please uninstall and re-install. </string>
+    <string name="sucess">Unzip Sucessed!</string>
+    <string name="failed">Unzip Failed,Please Retry!</string>
+    
+
+</resources>

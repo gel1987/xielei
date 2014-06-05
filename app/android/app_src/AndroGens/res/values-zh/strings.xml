@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">世嘉MD模拟器</string>
+    <string name="app_description">世嘉MD</string>
+    <string name="loadRomButtonLabel">载入游戏</string>
+    <string name="resumeButtonLabel">继续</string>
+    <string name="aboutButtonLabel">关于</string>
+    <string name="exitButtonLabel">退出</string>
+    <string name="rateButtonLabel">评价</string>
+    <string name="gameButtonLabel">Twitter</string>
+    <string name="settingButtonLabel">设置</string>
+    <string name="Copyright">Copyright 2012 - DroidHits / MDPlay</string>
+    <string name="submit">提交</string>
+    <string name="admob_id">a1535711c02b135</string>
+</resources>

@@ -1,0 +1,90 @@
+<PreferenceScreen 
+		xmlns:android="http://schemas.android.com/apk/res/android">
+
+    
+    <com.tizmoplay.androgens.AdPreference android:layout="@layout/ad_layout"/>
+    
+	<PreferenceCategory
+                android:title="@string/Emulation">
+		<ListPreference
+	            android:title="@string/Frameskip"
+	            android:key="frameSkip"
+	            android:defaultValue="0"
+	            android:entries="@array/frameSkipValues"
+	            android:entryValues="@array/frameSkipValues" />
+	            
+		<CheckBoxPreference android:key="enableAutosave" 
+				android:title="@string/Autosave_Autoload"
+				android:summary="@string/Autosave_Autoload_summary" 
+				android:defaultValue="false" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+                android:title="@string/Audio">			                
+		<CheckBoxPreference android:key="audio" 
+				android:title="@string/Audio" 
+				android:defaultValue="true" />
+				
+		<ListPreference
+	            android:title="@string/Sound_Rate"
+	            android:key="soundSampleRate"
+	            android:defaultValue="44100"
+	            android:entries="@array/listArray"
+	            android:entryValues="@array/listValues" />
+	</PreferenceCategory>
+	
+	
+	<PreferenceCategory
+                android:title="@string/Graphics">
+		<CheckBoxPreference android:key="aspectRatio" 
+				android:title="@string/Maintain_Ratio" 
+				android:defaultValue="true" />
+				
+		<ListPreference
+	            android:title="@string/Hardware_Filtering"
+	            android:key="graphicsFilter"
+	            android:defaultValue="true"
+	            android:entries="@array/hardwareFilterArray"
+	            android:entryValues="@array/hardwareFilterValues" />						
+				
+	</PreferenceCategory>	
+
+	<com.tizmoplay.androgens.AdPreference android:layout="@layout/ad_layout"/>
+	
+	<PreferenceCategory
+                android:title="@string/Input">	
+	    
+		<Preference
+	            android:title="@string/Configure_Input"
+	            android:summary="@string/Modify_input"
+	            android:key="bntInputPref" />
+	            
+		<CheckBoxPreference android:key="prefShowTouchInput" 
+				android:title="@string/Show_Input" 
+				android:defaultValue="true"
+				 />   	            
+	            
+		<Preference
+	            android:title="@string/Configure_Key_Input"
+	            android:summary="@string/Configure_Key_Input_sumy"
+	            android:key="bntCustomKeys" />	            
+	            
+		<Preference
+	            android:title="@string/Reset_Input"
+	            android:summary="@string/Reset_default"
+	            android:key="bntDefaultEmpty" />	                        
+	</PreferenceCategory>
+	
+	
+	<PreferenceCategory
+                android:title="@string/Directories">
+                
+		<Preference
+	            android:title="@string/Select_ROM_Dir"
+	            android:summary="Select_ROM_Dir_sumy"
+	            android:key="prefRomDir" />				                
+                
+	</PreferenceCategory>
+	
+</PreferenceScreen>

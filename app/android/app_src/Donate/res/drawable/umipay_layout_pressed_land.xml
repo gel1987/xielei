@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 按钮_白 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false" android:drawable="@color/transparent" /><!-- default -->
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:radius="2dp" />
+            <solid android:color="#585858" />
+            <padding 
+                android:right="4dp"
+                android:top="4dp"
+                android:bottom="4dp"
+                android:left="4dp"/>
+            <stroke
+                android:width="0dp"
+                android:color="#e8e8e8"
+            />
+        </shape>
+    </item>
+</selector>

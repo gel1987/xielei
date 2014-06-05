@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sega Genesis(MD)</string>
+    <string name="app_description">Sega Megadrive/Genesis Emulator</string>
+    <string name="loadRomButtonLabel">Load ROM</string>
+    <string name="resumeButtonLabel">Resume</string>
+    <string name="aboutButtonLabel">About</string>
+    <string name="exitButtonLabel">Exit</string>
+    <string name="rateButtonLabel">Rate</string>
+    <string name="gameButtonLabel">Twitter</string>
+    <string name="settingButtonLabel">Settings</string>
+    <string name="Copyright">Copyright 2012 - DroidHits / MDPlay</string>
+    <string name="submit">Submit</string>
+    <string name="admob_id">a1535711c02b135</string>
+</resources>

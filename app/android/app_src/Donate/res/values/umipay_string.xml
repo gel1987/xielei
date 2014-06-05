@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="login_name_hint">偶玩通行证、邮箱</string>
+    <string name="login_psw_hint">偶玩密码</string>
+    <string name="reg_name_hint">输入字母/数字/QQ号/邮箱</string>
+    <string name="reg_psw_hint">输入密码,7～15字母或数字</string>
+    <string name="reg_agreement"><u>偶玩服务条款</u></string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sega Genesis(MD)</string>
+    <string name="app_description">Sega Megadrive/Genesis Emulator</string>
+    <string name="loadRomButtonLabel">Load ROM</string>
+    <string name="resumeButtonLabel">Resume</string>
+    <string name="aboutButtonLabel">About</string>
+    <string name="exitButtonLabel">Exit</string>
+    <string name="rateButtonLabel">Rate</string>
+    <string name="gameButtonLabel">Games</string>
+    <string name="settingButtonLabel">Settings</string>
+    <string name="Copyright">Copyright 2012 - DroidHits / MDPlay</string>
+    <string name="submit">Submit</string>
+    <string name="admob_id">a1535711c02b135</string>
+     <string name="title">unzip</string>
+    <string name="message">unzip all game will use few minutes.\nGame Folder is /sdcard/Genesis/roms/</string>
+    <string name="ok">unzip</string>
+    <string name="cancel">Cancel</string>
+    <string name="waiting">unziping....</string>
+    <string name="no_file">Games Zip File Not Found,Please uninstall and re-install. </string>
+    <string name="sucess">Unzip Sucessed!</string>
+    <string name="failed">Unzip Failed,Please Retry!</string>
+    
+     <string name="text_paused_cellular">Would you like to enable downloading over cellular connections? Depending on your data plan, this may cost you money.</string>
+    <string name="text_paused_cellular_2">If you choose not to enable downloading over cellular connections, the download will automatically resume when wi-fi is available.</string>
+        <string name="text_button_resume_cellular">Resume download</string>
+    <string name="text_button_wifi_settings">Wi-Fi settings</string>
+        <string name="text_verifying_download">Verifying Download</string>
+    <string name="text_validation_complete">XAPK File Validation Complete.  Select OK to start the movie.</string>
+    <string name="text_validation_failed">XAPK File Validation Failed.</string>
+    <string name="text_button_pause">Pause Download</string>
+    <string name="text_button_resume">Resume Download</string>
+    <string name="text_button_cancel">Cancel</string>
+    <string name="text_button_cancel_verify">Cancel Verification</string>
+</resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mdplay.androgens"
+    android:versionCode="27"
+    android:versionName="2.7" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="22" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Required to access Android Market Licensing -->
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE" />
+    <!-- Required to download files from Android Market -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Required to keep CPU alive while downloading files (NOT to keep screen awake) -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Required to poll the state of the network connection and respond to changes -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Required to check whether Wi-Fi is enabled -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- Required to read and write the expansion files on shared storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:glEsVersion="0x00020000" />
+
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <!-- 
+        <activity
+            android:name="com.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> -->
+        <activity android:name="com.MainActivity" />
+        <activity android:name="com.tizmoplay.androgens.Main" />
+        <activity android:name="com.droidhits.genesisdroid.FileChooser" />
+        <activity android:name="com.droidhits.genesisdroid.SettingsActivity" />
+        <activity
+            android:name="com.droidhits.genesisdroid.KeyboardConfigActivityity"
+            android:configChanges="orientation" />
+        <activity
+            android:name="com.droidhits.genesisdroid.InputConfigActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.droidhits.genesisdroid.EmuActivity"
+            android:alwaysRetainTaskState="false"
+            android:configChanges="orientation|locale|keyboard|keyboardHidden"
+            android:multiprocess="false"
+            android:noHistory="false"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        
+         <activity
+            android:label="@string/app_name"
+            android:name="com.SampleDownloaderActivity" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+         In order to start the service, it must be uniquely registered with
+         the package manager here. 
+        -->
+        <service android:name="com.SampleDownloaderService" />
+
+        <!--
+         In order for the alarm manager to contact the downloader script, the receiver
+         must be uniquely registered with the package manager here. 
+        -->
+        <receiver android:name="com.SampleAlarmReceiver" />
+        
+    </application>
+
+</manifest>

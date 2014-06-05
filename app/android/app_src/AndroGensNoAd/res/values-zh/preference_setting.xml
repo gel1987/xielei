@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="Emulation">模拟器</string>
+    <string name="Frameskip">跳帧</string>
+    <string name="Autosave_Autoload">自动保存/自动加载</string>
+    <string name="Autosave_Autoload_summary">使用自动保存，防止丢失游戏进度</string>
+    <string name="Audio">音频</string>
+    <string name="Sound_Rate">采样率</string>
+    <string name="Graphics">图像</string>
+    <string name="Maintain_Ratio">保持长宽比</string>
+    <string name="Hardware_Filtering">硬件滤波</string>
+    <string name="Input">输入</string>
+    <string name="Configure_Input">配置触摸按键</string>
+    <string name="Modify_input">修改位置/大小</string>
+    <string name="Show_Input">显示触摸按键</string>
+    <string name="Configure_Key_Input">配置物理按键</string>
+    <string name="Configure_Key_Input_sumy">绑定按键</string>
+    <string name="Reset_Input">重置输入方式</string>
+    <string name="Reset_default">还原默认设置</string>
+    <string name="Directories">目录</string>
+    <string name="Select_ROM_Dir">选择游戏目录</string>
+    <string name="Select_ROM_Dir_sumy">目录: </string>
+
+</resources>

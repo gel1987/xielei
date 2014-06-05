@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d8000000"
+    android:orientation="vertical"
+    tools:context=".DemoMainActivity" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        android:padding="3dp"
+        android:text="@string/title_activity_demo_main"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@null" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/buttonbar"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="center"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/sdk_name"
+                android:textColor="#CAA548"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/buttonbar"
+            style="@style/ButtonBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:background="#26ffffff" />
+
+            <LinearLayout style="@style/ButtonBarRow_land" >
+
+                <LinearLayout
+                    android:id="@+id/pay"
+                    style="@style/ButtonBarButton_land" >
+
+                    <TextView
+                        style="@style/ButtonText"
+                        android:drawableTop="@drawable/pay"
+                        android:text="@string/pay" />
+                </LinearLayout>
+
+                <ScrollView
+                        style="@style/ButtonBarButton_land"
+                        android:layout_width="230dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/result"
+                                android:textColor="@color/f.w"
+                                />
+
+                            <TextView
+                                android:id="@+id/orderresult_tv"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:padding="2dp"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </LinearLayout>
+                    </ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_Exit">退出</string>
+    <string name="menu_Auto">自动</string>
+    <string name="menu_Load_State">载入进度</string>
+    <string name="menu_Load_ROM">加载游戏</string>
+    <string name="menu_Settings">设置</string>
+    <string name="menu_Select_State">选择进度</string>
+    <string name="menu_Save_State">保存进度</string>
+    <string name="menu_Reset_Game">重新开始</string>
+    <string name="menu_Menu">菜单</string>
+</resources>
