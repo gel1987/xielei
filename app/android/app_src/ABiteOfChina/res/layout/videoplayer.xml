@@ -1,0 +1,99 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff000000" >
+
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center" >
+    </SurfaceView>
+
+    <ImageView
+        android:id="@+id/thumb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000" >
+
+        <!-- title -->
+
+        <LinearLayout
+            android:id="@+id/palyer_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#80000000" >
+
+            <TextView
+                android:id="@+id/player_title_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Video Name"
+                android:textColor="#ff2a8449"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!-- Control bar -->
+
+        <RelativeLayout
+            android:id="@+id/palyer_control_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#80000000" >
+
+            <ImageView
+                android:id="@+id/palyer_control_paly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingBottom="10dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/play_ico_on" />
+
+            <ProgressBar
+                android:id="@+id/palyer_control_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="320dp"
+                android:layout_height="2dp"
+                android:layout_centerInParent="true"
+                android:indeterminateOnly="false"
+                android:max="100" />
+
+            <TextView
+                android:id="@+id/cur_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/palyer_control_progress"
+                android:paddingLeft="10dp"
+                android:text="00:00"
+                android:textColor="#ff2a8449"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/cur_time"
+                android:paddingLeft="6dp"
+                android:text="/00:00"
+                android:textColor="#ff2a8449"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>
