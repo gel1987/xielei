@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.test"
+    package="com.play.buyudarxl2"
     android:versionCode="243"
     android:versionName="3.0" >
 
@@ -113,40 +113,44 @@
 
 
         <!-- youmi -->
-
+        <!-- base -->
         <activity
-            android:name="com.cdd.ym.AdBrowser"
-            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
 
         <service
-            android:name="com.cdd.ym.AdService"
+            android:name="net.youmi.android.AdService"
             android:exported="false" >
         </service>
 
-        <receiver android:name="com.cdd.ym.AdReceiver" >
+        <receiver android:name="net.youmi.android.AdReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
 
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-        <!-- SmartBanner -->
+        <!-- smartbanner -->
         <activity
-            android:name="com.cdd.ym.SmartBannerActivity"
+            android:name="net.youmi.android.SmartBannerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:theme="@android:style/Theme.Translucent" >
         </activity>
 
         <service
-            android:name="com.cdd.ym.SmartBannerService"
+            android:name="net.youmi.android.SmartBannerService"
             android:exported="false" >
         </service>
-        <!-- SmartBanner -->
         <!-- 积分相关 -->
+        <service
+            android:name="net.youmi.android.ExpService"
+            android:exported="false" >
+        </service>
+
         <receiver
-            android:name="com.cdd.ym.offers.OffersReceiver"
+            android:name="net.youmi.android.offers.OffersReceiver"
             android:exported="false" >
         </receiver>
         <!-- 积分相关 -->

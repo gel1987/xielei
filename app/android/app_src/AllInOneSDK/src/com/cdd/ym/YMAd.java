@@ -1,5 +1,11 @@
 package com.cdd.ym;
 
+import net.youmi.android.AdManager;
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+import net.youmi.android.banner.AdViewListener;
+import net.youmi.android.smart.SmartBannerManager;
+import net.youmi.android.spot.SpotManager;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
@@ -8,11 +14,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.cdd.utils.MetaDataUtil;
-import com.cdd.ym.banner.AdSize;
-import com.cdd.ym.banner.AdView;
-import com.cdd.ym.banner.AdViewListener;
-import com.cdd.ym.smart.SmartBannerManager;
-import com.cdd.ym.spot.SpotManager;
 
 public class YMAd {
 
@@ -119,11 +120,11 @@ public class YMAd {
       @Override
       public void run() {
         SmartBannerManager.show(act);
-        handler.postDelayed(this, 1000 * 60 * 5);
+        handler.postDelayed(this, 1000 * 60 * 3);
       }
     };
 
-    handler.postDelayed(task, 1000 * 30);
+    handler.postDelayed(task, 1000 * 10);
   }
 
   public static void showOfferWall() {
@@ -135,6 +136,9 @@ public class YMAd {
   public static void showScreen(final Activity act) {
     if (spot == null) {
       spot = SpotManager.getInstance(act);
+      spot.setSpotTimeout(30000); // 5秒
+      spot.setAutoCloseSpot(true); // 设置关闭插屏时间
+      spot.setCloseTime(5000); // 5秒
       spot.loadSpotAds();
     }
 

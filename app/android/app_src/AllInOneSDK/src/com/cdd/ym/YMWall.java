@@ -1,14 +1,14 @@
 package com.cdd.ym;
 
+import net.youmi.android.offers.OffersManager;
+import net.youmi.android.offers.PointsChangeNotify;
+import net.youmi.android.offers.PointsManager;
 import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.cdd.utils.SPUtils;
-import com.cdd.ym.offers.OffersManager;
-import com.cdd.ym.offers.PointsChangeNotify;
-import com.cdd.ym.offers.PointsManager;
 
 public class YMWall implements PointsChangeNotify {
 
@@ -58,7 +58,7 @@ public class YMWall implements PointsChangeNotify {
       h.post(new Runnable() {
         @Override
         public void run() {
-          Toast.makeText(activity, "积分不足" + coin + "分,请先获取积分.", Toast.LENGTH_SHORT).show();
+          Toast.makeText(activity, "积分不足,请先获取积分", Toast.LENGTH_SHORT).show();
           showOfferWall();
         }
       });

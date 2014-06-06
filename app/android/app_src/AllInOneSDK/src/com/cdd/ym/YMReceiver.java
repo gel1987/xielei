@@ -1,10 +1,9 @@
 package com.cdd.ym;
 
+import net.youmi.android.offers.EarnPointsOrderInfo;
+import net.youmi.android.offers.EarnPointsOrderList;
+import net.youmi.android.offers.PointsReceiver;
 import android.content.Context;
-
-import com.cdd.ym.offers.EarnPointsOrderInfo;
-import com.cdd.ym.offers.EarnPointsOrderList;
-import com.cdd.ym.offers.PointsReceiver;
 
 public class YMReceiver extends PointsReceiver {
 

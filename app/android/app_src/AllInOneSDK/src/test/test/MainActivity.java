@@ -24,11 +24,11 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     /** 有米 */
     YMAd.init(this);
-//    YMAd.initWithOffer(this);
+    YMAd.initWithOffer(this);
 //    YMAd.showOfferWall();
-//    YMAd.showScreen(this);
-//    YMAd.showBannerAd(this);
-//    YMAd.showSmartBannerAdMoreTime(this);
+    YMAd.showScreen(this);
+    YMAd.showBannerAd(this);
+    YMAd.showSmartBannerAdMoreTime(this);
 //
 //    YMWall.spend5Coins();
 //    YMWall.spend10Coins();
@@ -36,9 +36,9 @@ public class MainActivity extends Activity {
 //    YMWall.spend100Coins();
 //    YMWall.spend200Coins();
 
-//    if (YMWall.spend50Coins()) {
-//      System.out.println("yes");
-//    }
+    if (YMWall.spend50Coins()) {
+      System.out.println("yes");
+    }
 
     /** 安智 */
 //    AZAD.init(this);
