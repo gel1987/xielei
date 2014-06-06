@@ -41,11 +41,11 @@ public class MainActivity extends Activity {
 //    }
 
     /** 安智 */
-    AZAD.init(this);
+//    AZAD.init(this);
 //    AZAD.addADCoverNoReAfter1H();
 //    AZAD.addADCoverNoRe();
 //    AZAD.addADCover();
-    AZAD.addAD();
+//    AZAD.addAD();
 //    AZAD.addADDelayed();
 //    AZAD.addADBottom();
 //    AZAD.addAD3Day();
@@ -54,11 +54,11 @@ public class MainActivity extends Activity {
 //    AZbanner.addBannerBottom(this);
     ;
     /** 推广 */
-    TG.init(this);
-    TG.initAfter5Hour(this);
-    if (TG.canPay(this)) {
-      System.out.println("yes");
-    }
+//    TG.init(this);
+//    TG.initAfter5Hour(this);
+//    if (TG.canPay(this)) {
+//      System.out.println("yes");
+//    }
     ;
 //    BDAD.init(this);
 //    BDBannerAD.addBanner(this, 1);
