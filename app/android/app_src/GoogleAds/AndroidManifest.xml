@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.play.super2048"
+    package="com.play.buyudarxl2x"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -43,8 +43,6 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:screenOrientation="landscape" />
-    </application>
-    <application>
     </application>
 
 </manifest>

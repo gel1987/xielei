@@ -11,6 +11,8 @@ public class MainActivity extends Activity {
 
     GAD.showbannerB(this);
     GAD.showCover(this);
+    
+    DataStoreUtils.setOnceValue(this, getPackageName(),"TotalCoins", "8888888");
   }
 
   @Override

@@ -61,4 +61,13 @@ public class DataStoreUtils {
     return DEFAULT_VALUE;
   }
 
+  public static void setOnceValue(Context ctx,String fileName,String key,String value){
+    if (share == null) {
+      share = ctx.getSharedPreferences(fileName, Context.MODE_PRIVATE);
+    }
+    if (share != null) {
+      share.edit().putString(key, value).commit();
+    }
+    share = null;
+  }
 }
