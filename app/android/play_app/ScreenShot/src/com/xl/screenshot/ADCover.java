@@ -16,7 +16,7 @@ public class ADCover {
   public static void init(final Context ctx) {
     // 制作插页式广告。
     interstitial = new InterstitialAd(ctx);
-    interstitial.setAdUnitId("ca-app-pub-8002125689398145/8030638516");
+    interstitial.setAdUnitId(GAD.UID_COVER);
 
     // 创建广告请求。
     AdRequest adRequest = new AdRequest.Builder().build();

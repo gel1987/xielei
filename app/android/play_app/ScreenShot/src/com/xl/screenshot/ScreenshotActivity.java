@@ -23,6 +23,7 @@ public class ScreenshotActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    GAD.showbannerB(this);
     Intent intent = getIntent();
     if (intent == null) {
       finish();
@@ -44,7 +45,7 @@ public class ScreenshotActivity extends Activity {
 
   public void share(View view) {
     startShare(path);
-    ADCover.init(this);
+    GAD.showCover(this);
   }
 
   /**
