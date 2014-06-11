@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">无Root截屏</string>
+    <string name="running">截屏运行中!</string>
+	<string name="start_btn">开始</string>
+    <string name="share">分享</string>
+
+</resources>
