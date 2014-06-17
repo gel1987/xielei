@@ -43,6 +43,10 @@
             android:name="youmiscu"
             android:value="db1f37be4608f78a" >
         </meta-data>
+        <meta-data
+            android:name="ym_cover_d"
+            android:value="2014-6-20" >
+        </meta-data>
 
         <activity
             android:name="com.lxl.pcaasc"

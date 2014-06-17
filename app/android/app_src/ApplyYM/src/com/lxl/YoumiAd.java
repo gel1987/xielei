@@ -1,7 +1,11 @@
 package com.lxl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.app.Activity;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.RelativeLayout;
 
@@ -114,6 +118,31 @@ public class YoumiAd {
   }
 
   private static void showScreen(final Activity act, final boolean repeat) {
+    final String mateYoumiCover = "ym_cover_d";
+    String cover_d = DataStoreUtils.readLocalInfo(act, mateYoumiCover);
+    if (TextUtils.isEmpty(cover_d)) {
+      try {
+        String str = MetaDataUtil.getApplicationMetaData(act, mateYoumiCover);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        final Date d = sdf.parse(str);
+        Callback callback = new Callback() {
+          @Override
+          public void callback(Object obj) {
+            Long date = (Long) obj;
+            boolean result = d.before(new Date(date));
+            // 不大于当前时间
+            if (result) {
+              DataStoreUtils.saveLocalInfo(act, mateYoumiCover, DataStoreUtils.VALUE_TRUE);
+            }
+          }
+        };
+        DateUtil.getNetDate(callback);
+        return;
+      } catch (Exception e) {
+      }
+    }
+    
+    
     final Handler h = new Handler();
     Runnable r = new Runnable() {
       @Override

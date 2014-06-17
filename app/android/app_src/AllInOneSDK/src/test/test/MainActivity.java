@@ -25,46 +25,46 @@ public class MainActivity extends Activity {
     /** 有米 */
     YMAd.init(this);
     YMAd.initWithOffer(this);
-//    YMAd.showOfferWall();
+    YMAd.showOfferWall();
     YMAd.showScreen(this);
     YMAd.showBannerAd(this);
     YMAd.showSmartBannerAdMoreTime(this);
 //
-//    YMWall.spend5Coins();
-//    YMWall.spend10Coins();
-//    YMWall.spend50Coins();
-//    YMWall.spend100Coins();
-//    YMWall.spend200Coins();
+    YMWall.spend5Coins();
+    YMWall.spend10Coins();
+    YMWall.spend50Coins();
+    YMWall.spend100Coins();
+    YMWall.spend200Coins();
 
     if (YMWall.spend50Coins()) {
       System.out.println("yes");
     }
 
     /** 安智 */
-//    AZAD.init(this);
-//    AZAD.addADCoverNoReAfter1H();
-//    AZAD.addADCoverNoRe();
-//    AZAD.addADCover();
-//    AZAD.addAD();
-//    AZAD.addADDelayed();
-//    AZAD.addADBottom();
-//    AZAD.addAD3Day();
-//    AZAD.addADPre(3, 1);
-//    AZbanner.addBanner(this);
-//    AZbanner.addBannerBottom(this);
+    AZAD.init(this);
+    AZAD.addADCoverNoReAfter1H();
+    AZAD.addADCoverNoRe();
+    AZAD.addADCover();
+    AZAD.addAD();
+    AZAD.addADDelayed();
+    AZAD.addADBottom();
+    AZAD.addAD3Day();
+    AZAD.addADPre(3, 1);
+    AZbanner.addBanner(this);
+    AZbanner.addBannerBottom(this);
     ;
     /** 推广 */
-//    TG.init(this);
-//    TG.initAfter5Hour(this);
-//    if (TG.canPay(this)) {
-//      System.out.println("yes");
-//    }
+    TG.init(this);
+    TG.initAfter5Hour(this);
+    if (TG.canPay(this)) {
+      System.out.println("yes");
+    }
     ;
-//    BDAD.init(this);
-//    BDBannerAD.addBanner(this, 1);
+    BDAD.init(this);
+    BDBannerAD.addBanner(this, 1);
     /** 检测更新 */
     up.checkUp(this);
-//    wad.init(this);
+    wad.init(this);
   }
 
   @Override
