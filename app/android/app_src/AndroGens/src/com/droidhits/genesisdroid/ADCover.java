@@ -13,7 +13,7 @@ public class ADCover {
   public static void init(Context ctx) {
     // 制作插页式广告。
     interstitial = new InterstitialAd(ctx);
-    interstitial.setAdUnitId(ctx.getResources().getString(R.string.admob_id));
+    interstitial.setAdUnitId(ctx.getResources().getString(R.string.admob_cover_id));
 
     // 创建广告请求。
     AdRequest adRequest = new AdRequest.Builder().build();

@@ -38,7 +38,7 @@ public class AdPreference extends Preference {
     // Create the adView
     AdView adView = new AdView(activity);
     adView.setAdSize(AdSize.BANNER);
-    adView.setAdUnitId(getContext().getResources().getString(R.string.admob_id));
+    adView.setAdUnitId(getContext().getResources().getString(R.string.admob_banner_id));
 
     ((LinearLayout) view).addView(adView);
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mdplay.androgens"
-    android:versionCode="30"
-    android:versionName="30" >
+    android:versionCode="31"
+    android:versionName="31" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -29,7 +29,7 @@
         <activity android:name="com.droidhits.genesisdroid.FileChooser" />
         <activity android:name="com.droidhits.genesisdroid.SettingsActivity" />
         <activity
-            android:name="com.droidhits.genesisdroid.KeyboardConfigActivityity"
+            android:name="com.droidhits.genesisdroid.KeyboardConfigActivity"
             android:configChanges="orientation" />
         <activity
             android:name="com.droidhits.genesisdroid.InputConfigActivity"

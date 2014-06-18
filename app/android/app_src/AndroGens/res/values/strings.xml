@@ -11,5 +11,6 @@
     <string name="settingButtonLabel">Settings</string>
     <string name="Copyright">Copyright 2012 - DroidHits / MDPlay</string>
     <string name="submit">Submit</string>
-    <string name="admob_id">a1535711c02b135</string>
+    <string name="admob_banner_id">ca-app-pub-8002125689398145/6833106918</string>
+    <string name="admob_cover_id">ca-app-pub-8002125689398145/8030638516</string>
 </resources>
