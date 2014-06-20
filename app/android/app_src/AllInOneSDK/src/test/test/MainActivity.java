@@ -61,6 +61,10 @@ public class MainActivity extends Activity {
     }
     ;
     BDAD.init(this);
+    BDAD.initAndshowCover(this);
+    BDAD.initAndshowCoverOnce(this);
+    BDAD.showCover(this);
+    BDAD.showCoverOnce(this);
     BDBannerAD.addBanner(this, 1);
     /** 检测更新 */
     up.checkUp(this);

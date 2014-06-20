@@ -15,6 +15,8 @@ public class AZCover {
 
   }
 
+  private static long oldTime = 0;
+
   /**
    * 显示插屏
    * 
@@ -22,6 +24,10 @@ public class AZCover {
    * @param repeat
    */
   public static void showAD(final Activity act, final boolean repeat) {
+    if ((System.currentTimeMillis() - oldTime) < 1000 * 30) {
+      return;
+    }
+    oldTime = System.currentTimeMillis();
     AZAD.handler.postDelayed(new Runnable() {
       @Override
       public void run() {

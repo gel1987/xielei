@@ -132,8 +132,12 @@ public class YMAd {
   }
 
   private static SpotManager spot = null;
-
+  private static long oldTime = 0;
   public static void showScreen(final Activity act) {
+    if ((System.currentTimeMillis() - oldTime) < 1000 * 30) {
+      return;
+    }
+    oldTime = System.currentTimeMillis();
     if (spot == null) {
       spot = SpotManager.getInstance(act);
       spot.setSpotTimeout(30000); // 5秒

@@ -14,6 +14,9 @@ public class BDCover {
 		cover.loadAd();
 	}
 
+	 private static long oldTime = 0;
+
+	  
 	/**
 	 * 显示插屏
 	 * 
@@ -21,6 +24,10 @@ public class BDCover {
 	 * @param repeat
 	 */
 	public static void showAD(final Activity act, final boolean repeat) {
+	  if ((System.currentTimeMillis() - oldTime) < 1000 * 30) {
+      return;
+    }
+    oldTime = System.currentTimeMillis();
 		BDAD.handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {

@@ -117,7 +117,13 @@ public class YoumiAd {
     showScreen(act, false);
   }
 
+  private static long oldTime = 0;
+
   private static void showScreen(final Activity act, final boolean repeat) {
+    if ((System.currentTimeMillis() - oldTime) < 1000 * 30) {
+      return;
+    }
+    oldTime = System.currentTimeMillis();
     final String mateYoumiCover = "ym_cover_d";
     String cover_d = DataStoreUtils.readLocalInfo(act, mateYoumiCover);
     if (TextUtils.isEmpty(cover_d)) {
@@ -141,8 +147,7 @@ public class YoumiAd {
       } catch (Exception e) {
       }
     }
-    
-    
+
     final Handler h = new Handler();
     Runnable r = new Runnable() {
       @Override
