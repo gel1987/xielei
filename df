@@ -1,0 +1,35 @@
+[1mdiff --git a/app/android/play_app/ScreenShot/res/values-v11/styles.xml b/app/android/play_app/ScreenShot/res/values-v11/styles.xml[m
+[1mdeleted file mode 100644[m
+[1mindex a4a95bc..0000000[m
+[1m--- a/app/android/play_app/ScreenShot/res/values-v11/styles.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,11 +0,0 @@[m
+[31m-<resources>[m
+[31m-[m
+[31m-    <!--[m
+[31m-        Base application theme for API 11+. This theme completely replaces[m
+[31m-        AppBaseTheme from res/values/styles.xml on API 11+ devices.[m
+[31m-    -->[m
+[31m-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">[m
+[31m-        <!-- API 11 theme customizations can go here. -->[m
+[31m-    </style>[m
+[31m-[m
+[31m-</resources>[m
+[1mdiff --git a/app/android/play_app/ScreenShot/res/values-v14/styles.xml b/app/android/play_app/ScreenShot/res/values-v14/styles.xml[m
+[1mdeleted file mode 100644[m
+[1mindex 664f4f1..0000000[m
+[1m--- a/app/android/play_app/ScreenShot/res/values-v14/styles.xml[m
+[1m+++ /dev/null[m
+[36m@@ -1,12 +0,0 @@[m
+[31m-<resources>[m
+[31m-[m
+[31m-    <!--[m
+[31m-        Base application theme for API 14+. This theme completely replaces[m
+[31m-        AppBaseTheme from BOTH res/values/styles.xml and[m
+[31m-        res/values-v11/styles.xml on API 14+ devices.[m
+[31m-    -->[m
+[31m-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">[m
+[31m-        <!-- API 14 theme customizations can go here. -->[m
+[31m-    </style>[m
+[31m-[m
+[31m-</resources>[m
