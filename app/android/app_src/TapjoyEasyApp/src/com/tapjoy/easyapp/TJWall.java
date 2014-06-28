@@ -40,8 +40,8 @@ public class TJWall {
     // starts.
     // REPLACE THE APP ID WITH YOUR TAPJOY APP ID.
     // REPLACE THE SECRET KEY WITH YOUR SECRET KEY.
-    String tapjoyAppID = "d9a25688-1c21-43c9-99ef-702d912bfd75";
-    String tapjoySecretKey = "3uIJ1GAtJOBDUjvsbfky";
+    String tapjoyAppID = "56a7ca02-7237-4a18-817d-5d8d2ca4047a";
+    String tapjoySecretKey = "K52MeFhINWNcUv0bOIM3";
     // NOTE: This is the only step required if you're an advertiser.
     TapjoyConnect.requestTapjoyConnect(ctx, tapjoyAppID, tapjoySecretKey, flags, new TapjoyConnectNotifier() {
       @Override
@@ -67,8 +67,8 @@ public class TJWall {
     // TapjoyConnect.getTapjoyConnectInsance().setUserID(...)
     // must be called after requestTapjoyConnect.
     if (0 == SPUtils.getIntValue(ctx, "tjinit")) {
-      // 赠送30金币
-      TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(15, new TapjoyAwardPointsNotifier() {
+      // 赠送5金币
+      TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(5, new TapjoyAwardPointsNotifier() {
         @Override
         public void getAwardPointsResponseFailed(String arg0) {
         }

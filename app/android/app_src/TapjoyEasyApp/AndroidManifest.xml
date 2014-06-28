@@ -56,6 +56,7 @@
         <activity
             android:name="com.tapjoy.mraid.view.Browser"
             android:configChanges="orientation|keyboardHidden|screenSize" />
+        
     </application>
 
 </manifest>

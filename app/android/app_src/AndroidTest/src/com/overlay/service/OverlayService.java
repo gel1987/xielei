@@ -1,23 +1,28 @@
 package com.overlay.service;
 
+import java.lang.reflect.Constructor;
+
+import android.app.Dialog;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
 import com.overlay.ui.view.OverlayView;
 
-public class OverlayService extends IntentService implements OnTouchListener {
+public class OverlayService extends IntentService implements OnTouchListener, OnLongClickListener {
   private static final String TAG = "OverlayService";
   private WindowManager.LayoutParams windowParams;
   private WindowManager windowManager = null;
@@ -34,7 +39,7 @@ public class OverlayService extends IntentService implements OnTouchListener {
 
   private void initWinParams() {
     windowParams = new WindowManager.LayoutParams();
-    windowParams.type = LayoutParams.TYPE_PHONE; // 设置window type
+    windowParams.type = LayoutParams.TYPE_SYSTEM_ALERT; // 设置window type
     windowParams.format = PixelFormat.RGBA_8888; // 设置图片格式，效果为背景透明
     // 设置Window flag
     windowParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
@@ -95,6 +100,7 @@ public class OverlayService extends IntentService implements OnTouchListener {
     overlayView.setBackgroundColor(Color.BLACK);
     overlayView.setText("T");
     overlayView.setOnTouchListener(this);
+    overlayView.setOnLongClickListener(this);
     windowManager.addView(overlayView, windowParams);
   }
 
@@ -107,7 +113,14 @@ public class OverlayService extends IntentService implements OnTouchListener {
   private float tempY = 0;
   private float left = 0;
   private float top = 0;
-  private Handler handler = new Handler();
+  private Handler handler = new Handler() {
+    @Override
+    public void handleMessage(Message msg) {
+      windowParams.x = msg.arg1;
+      windowParams.y = msg.arg2;
+      windowManager.updateViewLayout(overlayView, windowParams);
+    }
+  };
 
   @Override
   public boolean onTouch(View v, MotionEvent event) {
@@ -120,61 +133,35 @@ public class OverlayService extends IntentService implements OnTouchListener {
     switch (action) {
       case MotionEvent.ACTION_DOWN:
       case MotionEvent.ACTION_POINTER_DOWN:
-        Log.e(TAG, "ACTION_DOWN:" + action);
         left = rawX - x;
         top = rawY - y - statusBarHeight;
         tempX = rawX;
         tempY = rawY;
-        Log.e(TAG, String.format("tempX=%f,tempY=%f,rawX=%f,rawY=%f", tempX, tempY, rawX, rawY));
         break;
       case MotionEvent.ACTION_UP:
       case MotionEvent.ACTION_POINTER_UP:
       case MotionEvent.ACTION_CANCEL:
-        Log.e(TAG, "ACTION_UP:" + action);
         x = left + (rawX - tempX);
         y = top + (rawY - tempY);
-        float toX = x < screenWidth / 2 ? 0 : screenWidth - overlayView.getWidth();
-        float toY = 0;
-        if (y < screenHeight / 10) {
-          toY = 20;
-        } else if (y < screenHeight / 10 * 2) {
-          toY = screenHeight / 10 * 2 - overlayView.getHeight();
-        } else if (y < screenHeight / 10 * 3) {
-          toY = screenHeight / 10 * 3 - overlayView.getHeight();
-        } else if (y < screenHeight / 10 * 4) {
-          toY = screenHeight / 10 * 4 - overlayView.getHeight();
-        } else if (y < screenHeight / 10 * 5) {
-          toY = screenHeight / 10 * 5 - overlayView.getHeight();
-        } else if (y < screenHeight / 10 * 6) {
-          toY = screenHeight / 10 * 6 - overlayView.getHeight();
-        } else if (y < screenHeight / 10 * 7) {
-          toY = screenHeight / 10 * 7 - overlayView.getHeight();
-        } else if (y < screenHeight / 10 * 8) {
-          toY = screenHeight / 10 * 8 - overlayView.getHeight();
-        } else if (y < screenHeight / 10 * 9) {
-          toY = screenHeight / 10 * 9 - overlayView.getHeight();
-        } else {
-          toY = screenHeight - overlayView.getHeight() - statusBarHeight;
-        }
-        final int toXPoint = (int) toX;
-        final int toYPoint = (int) toY;
-        Log.e(TAG, String.format("toX=%f,toY=%f", toX, toY));
-        Runnable task = new Runnable() {
-          @Override
-          public void run() {
-            windowParams.x = toXPoint;
-            windowParams.y = toYPoint;
-            windowManager.updateViewLayout(overlayView, windowParams);
+        final int toXPoint = (int) (x < screenWidth / 2 ? 0 : screenWidth - overlayView.getWidth());
+        final int toYPoint = (int) (y > screenHeight - overlayView.getHeight() - statusBarHeight ? screenHeight
+            - overlayView.getHeight() - statusBarHeight : y);
+
+        int oldX = windowParams.x;
+        float pre = (toXPoint - oldX) / 200f;
+        for (int i = 0; i < 150; i++) {
+          int tox = toXPoint;
+          if (i != 149) {
+            tox = (int) (oldX + pre * i);
           }
-        };
-        handler.post(task);
+          Message msg = Message.obtain(handler, 0, tox, toYPoint);
+          handler.sendMessageDelayed(msg, i);
+        }
         break;
       case MotionEvent.ACTION_MOVE:
       case MotionEvent.ACTION_OUTSIDE:
-        Log.e(TAG, "ACTION_MOVE:" + action);
         x = left + (rawX - tempX);
         y = top + (rawY - tempY);
-        Log.e(TAG, String.format("rawX=%f,rawY=%f,x=%f,y=%f", rawX, rawY, x, y));
         if (x < 0) {
           x = 0;
         } else if (x > screenWidth - overlayView.getWidth()) {
@@ -190,6 +177,20 @@ public class OverlayService extends IntentService implements OnTouchListener {
         windowManager.updateViewLayout(overlayView, windowParams);
         break;
     }
-    return true;
+    return false;
+  }
+
+  @Override
+  public boolean onLongClick(View v) {
+    try {
+      String recentDialogClass = "com.android.internal.policy.impl.RecentApplicationsDialog";
+      Class dialogClass = Class.forName(recentDialogClass);
+      Constructor ctor = dialogClass.getConstructor(Context.class);
+      Dialog dialog = (Dialog) ctor.newInstance(this);
+      dialog.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return false;
   }
 }

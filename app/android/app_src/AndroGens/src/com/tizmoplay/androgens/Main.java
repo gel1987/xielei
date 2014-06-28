@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 
+import com.cdd.up;
 import com.droidhits.genesisdroid.MainActivity;
 import com.droidhits.genesisdroid.Preferences;
 
@@ -18,11 +19,12 @@ public class Main extends MainActivity {
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-//    unzipGames();
+    up.checkUp(this);
+    // unzipGames();
   }
 
   private void unzipGames() {
-    copyFromAssets(this, "roms.zip", SD_PATH + Preferences.DEFAULT_DIR_ROMS+"/roms.zip");
+    copyFromAssets(this, "roms.zip", SD_PATH + Preferences.DEFAULT_DIR_ROMS + "/roms.zip");
   }
 
   /**
