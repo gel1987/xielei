@@ -1,4 +1,4 @@
-package com.cdd.up;
+package com.cdd.tg;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -15,11 +15,11 @@ import com.cdd.utils.HttpUtils;
 import com.cdd.utils.InputStreamParser;
 import com.cdd.utils.PackageUtils;
 
-public class up {
+public class TGD {
 
   private static Activity activity;
-  // https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/com.play.super2048
-  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/tg/";
+//https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/com.play.super2048
+  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/";
 
   private static Handler handler = null;
 
@@ -79,11 +79,11 @@ public class up {
       // 3* : 更新地址
       int version = Integer.valueOf(up[0]);
       final String upaddr = up[2];
-      int currentVersion = PackageUtils.getVersionCode(activity, up[1]);
+      int currentVersion = PackageUtils.getVersionCode(activity,up[1]);
       if (version > currentVersion) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("提示").setMessage("安装推广软件,获取更多游戏.");
-        builder.setPositiveButton("下载", new DialogInterface.OnClickListener() {
+        builder.setTitle("更新").setMessage("有新版本需要升级,请先升级再使用.");
+        builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
             Uri uri = Uri.parse(upaddr);

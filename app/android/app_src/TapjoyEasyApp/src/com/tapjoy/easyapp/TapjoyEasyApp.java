@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.kunpo88.baba2.R;
 import com.tapjoy.TapjoyAwardPointsNotifier;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyConnectFlag;

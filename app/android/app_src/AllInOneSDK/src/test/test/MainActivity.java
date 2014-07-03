@@ -10,7 +10,6 @@ import com.cdd.baidu.BDAD;
 import com.cdd.baidu.BDBannerAD;
 import com.cdd.tg.TG;
 import com.cdd.up.up;
-import com.cdd.wad.wad;
 import com.cdd.ym.YMAd;
 import com.cdd.ym.YMWall;
 import com.umeng.analytics.MobclickAgent;
@@ -68,7 +67,6 @@ public class MainActivity extends Activity {
     BDBannerAD.addBanner(this, 1);
     /** 检测更新 */
     up.checkUp(this);
-    wad.init(this);
   }
 
   @Override

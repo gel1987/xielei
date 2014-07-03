@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tapjoy.easyapp"
+    package="com.kunpo88.baba2"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -33,6 +33,13 @@
         </activity>
 
         <!-- Tapjoy -->
+        <meta-data
+            android:name="tjID"
+            android:value="56a7ca02-7237-4a18-817d-5d8d2ca4047a" />
+        <meta-data
+            android:name="tjskey"
+            android:value="K52MeFhINWNcUv0bOIM3" />
+
         <activity
             android:name="com.tapjoy.TJCOffersWebView"
             android:configChanges="orientation|keyboardHidden|screenSize" />
@@ -56,7 +63,8 @@
         <activity
             android:name="com.tapjoy.mraid.view.Browser"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-        
+        <meta-data android:name="tapjoy.store_name" android:value="gfan" />
+        <!-- Tapjoy -->
     </application>
 
 </manifest>

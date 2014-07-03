@@ -2,16 +2,24 @@ package com.tapjoy.easyapp;
 
 import java.util.Hashtable;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.tapjoy.TapjoyAwardPointsNotifier;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyConnectFlag;
 import com.tapjoy.TapjoyConnectNotifier;
+import com.tapjoy.TapjoyDisplayAdNotifier;
 import com.tapjoy.TapjoyEarnedPointsNotifier;
+import com.tapjoy.TapjoyFullScreenAdNotifier;
 import com.tapjoy.TapjoyNotifier;
 import com.tapjoy.TapjoyOffersNotifier;
 import com.tapjoy.TapjoySpendPointsNotifier;
@@ -21,14 +29,21 @@ public class TJWall {
 
   protected static final String TAG = "TJWall";
 
-  private static Context ctx;
+  private static Activity act;
 
   private static int coins = 0;
 
   private static Handler handler = new Handler();
 
-  public static void init(Context act) {
-    ctx = act;
+  public static int position = 1;
+
+  public static boolean isAddBanner = false;
+
+  private static String tapjoyAppID = "56a7ca02-7237-4a18-817d-5d8d2ca4047a";
+  private static String tapjoySecretKey = "K52MeFhINWNcUv0bOIM3";
+
+  public static void init(Activity activity) {
+    act = activity;
 
     // Enables logging to the console.
     // TapjoyLog.enableLogging(true);
@@ -40,10 +55,10 @@ public class TJWall {
     // starts.
     // REPLACE THE APP ID WITH YOUR TAPJOY APP ID.
     // REPLACE THE SECRET KEY WITH YOUR SECRET KEY.
-    String tapjoyAppID = "56a7ca02-7237-4a18-817d-5d8d2ca4047a";
-    String tapjoySecretKey = "K52MeFhINWNcUv0bOIM3";
+    tapjoyAppID = MetaDataUtil.getApplicationMetaData(activity, "tjID", tapjoyAppID);
+    tapjoySecretKey = MetaDataUtil.getApplicationMetaData(activity, "tjskey", tapjoySecretKey);
     // NOTE: This is the only step required if you're an advertiser.
-    TapjoyConnect.requestTapjoyConnect(ctx, tapjoyAppID, tapjoySecretKey, flags, new TapjoyConnectNotifier() {
+    TapjoyConnect.requestTapjoyConnect(act, tapjoyAppID, tapjoySecretKey, flags, new TapjoyConnectNotifier() {
       @Override
       public void connectSuccess() {
         Log.e(TAG, " connectSuccess ");
@@ -66,7 +81,7 @@ public class TJWall {
     // For NON-MANAGED virtual currency,
     // TapjoyConnect.getTapjoyConnectInsance().setUserID(...)
     // must be called after requestTapjoyConnect.
-    if (0 == SPUtils.getIntValue(ctx, "tjinit")) {
+    if (0 == SPUtils.getIntValue(act, "tjinit")) {
       // 赠送5金币
       TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(5, new TapjoyAwardPointsNotifier() {
         @Override
@@ -75,7 +90,7 @@ public class TJWall {
 
         @Override
         public void getAwardPointsResponse(String arg0, int arg1) {
-          SPUtils.saveValue(ctx, "tjinit", 1);
+          SPUtils.saveValue(act, "tjinit", 1);
           coins = arg1;
         }
       });
@@ -92,18 +107,22 @@ public class TJWall {
     TapjoyConnect.getTapjoyConnectInstance().setTapjoyViewNotifier(new TapjoyViewNotifier() {
       @Override
       public void viewWillOpen(int viewType) {
+        Log.e(TAG, "viewWillOpen Sucess!");
       }
 
       @Override
       public void viewWillClose(int viewType) {
+        Log.e(TAG, "viewWillClose Sucess!");
       }
 
       @Override
       public void viewDidOpen(int viewType) {
+        Log.e(TAG, "viewDidOpen Sucess!");
       }
 
       @Override
       public void viewDidClose(int viewType) {
+        Log.e(TAG, "viewDidClose Sucess!");
       }
     });
 
@@ -119,10 +138,15 @@ public class TJWall {
         coins = pointTotal;
       }
     });
+
+    showCover();
+    if (isAddBanner) {
+      showBanner();
+    }
   }
 
   public static void showWall() {
-    showWall(ctx);
+    showWall(act);
   }
 
   public static void showWall(Context act) {
@@ -140,6 +164,109 @@ public class TJWall {
           public void getOffersResponseFailed(String error) {
           }
         });
+      }
+    });
+  }
+
+  public static void showBanner() {
+    // Show the display/banner ad.
+    TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
+    TapjoyConnect.getTapjoyConnectInstance().getDisplayAd(act, new TapjoyDisplayAdNotifier() {
+      @Override
+      public void getDisplayAdResponseFailed(String error) {
+        Log.e(TAG, "showBanner Error! " + error);
+      }
+
+      @Override
+      public void getDisplayAdResponse(View view) {
+        Log.e(TAG, "showBanner Sucess!");
+        // Using screen width, but substitute for the any width.
+        addBanner(act, view);
+      }
+    });
+  }
+
+  /**
+   * 
+   * @param act
+   * @param position
+   *          0:底部 1:顶部
+   * @param pre
+   *          size百分比
+   */
+  private static void addBanner(final Activity act, View adView) {
+    RelativeLayout.LayoutParams parentLayputParams = new RelativeLayout.LayoutParams(
+        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+    if (position == 1) {
+      parentLayputParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+    } else {
+      parentLayputParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+    }
+    parentLayputParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+
+    WindowManager manage = act.getWindowManager();
+    Display display = manage.getDefaultDisplay();
+
+    int size = Math.min(display.getWidth(), display.getHeight());
+    adView = scaleDisplayAd(adView, size);
+    RelativeLayout adLayout = new RelativeLayout(act);
+
+    LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    adLayout.addView(adView, layoutParams);
+
+    act.addContentView(adLayout, parentLayputParams);
+  }
+
+  /**
+   * Scales a display ad view to fit within a specified width. Returns a resized
+   * (smaller) view if the display ad is larger than the width. This method does
+   * not modify the view if the banner is smaller than the width (does not
+   * resize larger).
+   * 
+   * @param adView
+   *          Display Ad view to resize.
+   * @param targetWidth
+   *          Width of the parent view for the display ad.
+   * @return Resized display ad view.
+   */
+  private static View scaleDisplayAd(View adView, int targetWidth) {
+    int adWidth = adView.getLayoutParams().width;
+    int adHeight = adView.getLayoutParams().height;
+
+    // Scale if the ad view is too big for the parent view.
+    if (adWidth > targetWidth) {
+      int scale;
+      int width = targetWidth;
+      Double val = Double.valueOf(width) / Double.valueOf(adWidth);
+      val = val * 100d;
+      scale = val.intValue();
+
+      ((android.webkit.WebView) (adView)).getSettings().setSupportZoom(true);
+      ((android.webkit.WebView) (adView)).setPadding(0, 0, 0, 0);
+      ((android.webkit.WebView) (adView)).setVerticalScrollBarEnabled(false);
+      ((android.webkit.WebView) (adView)).setHorizontalScrollBarEnabled(false);
+      ((android.webkit.WebView) (adView)).setInitialScale(scale);
+
+      // Resize banner to desired width and keep aspect ratio.
+      LayoutParams layout = new LayoutParams(targetWidth, (targetWidth * adHeight) / adWidth);
+      adView.setLayoutParams(layout);
+    }
+
+    return adView;
+  }
+
+  public static void showCover() {
+    // Show the full screen ad.
+    TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(new TapjoyFullScreenAdNotifier() {
+      @Override
+      public void getFullScreenAdResponseFailed(int error) {
+        Log.e(TAG, "showCover Error! " + error);
+      }
+
+      @Override
+      public void getFullScreenAdResponse() {
+        Log.e(TAG, "showCover Sucess!");
+        TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();
       }
     });
   }
@@ -181,7 +308,7 @@ public class TJWall {
       @Override
       public void run() {
         if (coin > coins) {
-          Toast.makeText(ctx, "coin is not enough,you need " + coin + " coins", Toast.LENGTH_LONG).show();
+          Toast.makeText(act, "coin is not enough,you need " + coin + " coins", Toast.LENGTH_LONG).show();
           onPayFailed(payCode);
           showWall();
         } else {
@@ -193,7 +320,7 @@ public class TJWall {
               handler.post(new Runnable() {
                 @Override
                 public void run() {
-                  Toast.makeText(ctx, "error,please retry!", Toast.LENGTH_LONG).show();
+                  Toast.makeText(act, "error,please retry!", Toast.LENGTH_LONG).show();
                   onPayFailed(payCode);
                 }
               });
@@ -205,7 +332,7 @@ public class TJWall {
               handler.post(new Runnable() {
                 @Override
                 public void run() {
-                  Toast.makeText(ctx, "Sucess!", Toast.LENGTH_LONG).show();
+                  Toast.makeText(act, "Sucess!", Toast.LENGTH_LONG).show();
                   onPaySucess(payCode);
                   coins = pointTotal;
                 }

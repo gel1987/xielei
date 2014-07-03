@@ -31,16 +31,14 @@ public class LockApplication extends Application {
     super.attachBaseContext(base);
     try {
       File odex = this.getDir(ODEX_NAME, MODE_PRIVATE);
-      File libs = new File(odex.getParentFile().getAbsolutePath()+"/lib");
+      File libs = new File(odex.getParentFile().getAbsolutePath() + "/lib");
       File cache = this.getDir(CACHE, MODE_PRIVATE);
       odexPath = odex.getAbsolutePath();
       libPath = libs.getAbsolutePath();
       dexPath = cache.getAbsolutePath() + "/new.dex";
       File dexFile = new File(dexPath);
-      if (!dexFile.exists()) {
-        dexFile.createNewFile();
-        DexUtil.lockDex2File(getAssets().open("sys.so"), new FileOutputStream(dexFile));
-      }
+      dexFile.createNewFile();
+      DexUtil.lockDex2File(getAssets().open("sys.so"), new FileOutputStream(dexFile));
       // 配置动态加载环境
       Object currentActivityThread = RefInvoke.invokeStaticMethod("android.app.ActivityThread",
           "currentActivityThread", new Class[] {}, new Object[] {});

@@ -12,10 +12,11 @@ public class TestShadowActivity extends Activity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-     startService(new Intent(this, OverlayService.class));
+    startService(new Intent(this, OverlayService.class));
     Intent intent = new Intent(this, WebPageActivity.class);
     intent.putExtra(WebPageActivity.WEBPAGE_URL, url);
-    startActivity(intent);
-    finish();
+    // startActivity(intent);
+//    finish();
+
   }
 }
