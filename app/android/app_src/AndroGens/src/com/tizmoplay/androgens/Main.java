@@ -12,6 +12,7 @@ import android.os.Environment;
 import com.cdd.up;
 import com.droidhits.genesisdroid.MainActivity;
 import com.droidhits.genesisdroid.Preferences;
+import com.tapjoy.TJWall;
 
 public class Main extends MainActivity {
 
@@ -20,6 +21,7 @@ public class Main extends MainActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     up.checkUp(this);
+    TJWall.init(this);
     // unzipGames();
   }
 

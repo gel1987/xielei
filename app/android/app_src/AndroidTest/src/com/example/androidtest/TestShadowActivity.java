@@ -17,6 +17,6 @@ public class TestShadowActivity extends Activity {
     intent.putExtra(WebPageActivity.WEBPAGE_URL, url);
     // startActivity(intent);
 //    finish();
-
+//getPackageManager().getPackageInfo("dd", 0).signatures;
   }
 }
