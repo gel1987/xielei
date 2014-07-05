@@ -8,6 +8,7 @@ import com.cdd.az.AZAD;
 import com.cdd.az.AZbanner;
 import com.cdd.baidu.BDAD;
 import com.cdd.baidu.BDBannerAD;
+import com.cdd.obb.CopyObb;
 import com.cdd.tg.TG;
 import com.cdd.up.up;
 import com.cdd.ym.YMAd;
@@ -28,7 +29,7 @@ public class MainActivity extends Activity {
     YMAd.showScreen(this);
     YMAd.showBannerAd(this);
     YMAd.showSmartBannerAdMoreTime(this);
-//
+    //
     YMWall.spend5Coins();
     YMWall.spend10Coins();
     YMWall.spend50Coins();
@@ -67,6 +68,9 @@ public class MainActivity extends Activity {
     BDBannerAD.addBanner(this, 1);
     /** 检测更新 */
     up.checkUp(this);
+
+    CopyObb.copyMainObb(this);
+    CopyObb.copyPatchObb(this);
   }
 
   @Override
