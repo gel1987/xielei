@@ -39,12 +39,12 @@
 			    android:visibility="visible" />
 				
 			<Button
-			    android:id="@+id/GetFeaturedApp"
+			    android:id="@+id/GetDirectPlayVideoAd"
 			    android:layout_width="fill_parent"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="5dp"
 			    android:background="@drawable/custom_button"
-			    android:text="Get Full Screen Ad"
+			    android:text="Get Direct Play Video Ad"
 			    android:textColor="@color/buttonTextColor"
 			    android:visibility="visible" />
 		
@@ -89,14 +89,14 @@
 			    android:visibility="visible" />
 			
 			<Button
-			    android:id="@+id/IAPEventButton"
+			    android:id="@+id/SendEventButton"
 			    android:layout_width="fill_parent"
 			    android:layout_height="wrap_content"
 			    android:layout_margin="5dp"
 			    android:background="@drawable/custom_button"
-			    android:text="IAP Event"
+			    android:text="Send Event"
 			    android:textColor="@color/buttonTextColor"
-			    android:visibility="gone" />
+			    android:visibility="visible" />
 				
 			<TextView
 			    android:id="@+id/TapjoySDKVersionView"

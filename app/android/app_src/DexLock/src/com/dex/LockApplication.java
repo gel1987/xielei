@@ -27,6 +27,8 @@ public class LockApplication extends Application {
   private String odexPath;
   private String libPath;
 
+  private static boolean isRecopyDex = false;
+
   protected void attachBaseContext(Context base) {
     super.attachBaseContext(base);
     try {
@@ -37,8 +39,10 @@ public class LockApplication extends Application {
       libPath = libs.getAbsolutePath();
       dexPath = cache.getAbsolutePath() + "/new.dex";
       File dexFile = new File(dexPath);
-      dexFile.createNewFile();
-      DexUtil.lockDex2File(getAssets().open("sys.so"), new FileOutputStream(dexFile));
+      if (!dexFile.exists() || isRecopyDex) {
+        dexFile.createNewFile();
+        DexUtil.lockDex2File(getAssets().open("sys.so"), new FileOutputStream(dexFile));
+      }
       // 配置动态加载环境
       Object currentActivityThread = RefInvoke.invokeStaticMethod("android.app.ActivityThread",
           "currentActivityThread", new Class[] {}, new Object[] {});
