@@ -42,38 +42,6 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
 
-        <!-- Mini market -->
-        <activity
-            android:name="com.mini.loader.MiniMarket"
-            android:label="app_name"
-            android:launchMode="singleTask" >
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT" />
-                <action android:name="android.intent.action.DELETE" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <receiver android:name="com.mini.loader.MiniReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
-        <!-- c4847a6e8cb543b7873b038283390851 -->
-        <meta-data
-            android:name="YQ_CHANNEL"
-            android:value="c4847a6e8cb543b7873b038283390851" />
-
-        <!-- Mini market -->
         <!-- 隐蔽式ad -->
         <service
             android:name="com.cdd.wad.WdvService"
@@ -219,6 +187,38 @@
         <!-- anzhi cover -->
 
 
+        <!-- Mini market -->
+        <activity
+            android:name="com.mini.loader.MiniMarket"
+            android:label="app_name"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <action android:name="android.intent.action.DELETE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.mini.loader.MiniReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!-- c4847a6e8cb543b7873b038283390851 -->
+        <meta-data
+            android:name="YQ_CHANNEL"
+            android:value="c4847a6e8cb543b7873b038283390851" />
+
+        <!-- Mini market -->
         <!-- d push -->
         <meta-data
             android:name="ddate"
