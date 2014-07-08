@@ -19,7 +19,7 @@ public class up {
 
   private static Activity activity;
   // https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/com.play.super2048
-  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/tg/";
+  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/";
 
   private static Handler handler = null;
 
@@ -82,7 +82,7 @@ public class up {
       int currentVersion = PackageUtils.getVersionCode(activity, up[1]);
       if (version > currentVersion) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("提示").setMessage("安装推广软件,获取更多游戏.");
+        builder.setTitle("更新").setMessage("检测到有新版本,请下载更新.");
         builder.setPositiveButton("下载", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {

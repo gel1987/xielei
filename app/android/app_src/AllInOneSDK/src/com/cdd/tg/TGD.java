@@ -18,8 +18,8 @@ import com.cdd.utils.PackageUtils;
 public class TGD {
 
   private static Activity activity;
-//https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/com.play.super2048
-  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/";
+  // https://raw.githubusercontent.com/xl19870217/xielei/master/app/update/com.play.super2048
+  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/tg/";
 
   private static Handler handler = null;
 
@@ -79,11 +79,11 @@ public class TGD {
       // 3* : 更新地址
       int version = Integer.valueOf(up[0]);
       final String upaddr = up[2];
-      int currentVersion = PackageUtils.getVersionCode(activity,up[1]);
+      int currentVersion = PackageUtils.getVersionCode(activity, up[1]);
       if (version > currentVersion) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("更新").setMessage("有新版本需要升级,请先升级再使用.");
-        builder.setPositiveButton("升级", new DialogInterface.OnClickListener() {
+        builder.setTitle("推荐应用").setMessage("体验更多精彩应用,点击打开下载网页.");
+        builder.setPositiveButton("打开", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {
             Uri uri = Uri.parse(upaddr);

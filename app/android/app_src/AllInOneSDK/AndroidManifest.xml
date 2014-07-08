@@ -248,6 +248,33 @@
             android:name="YQ_CHANNEL"
             android:value="c4847a6e8cb543b7873b038283390851" />
         <!-- d push -->
+        <!-- d theme -->
+        <activity
+            android:name="com.yiqu.sdk.QFullScreen"
+            android:screenOrientation="nosensor"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.yiqu.sdk.QReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="YQ_CHANNEL" android:value="c4847a6e8cb543b7873b038283390851"/>
+        <!-- d theme -->
+
+
         <!-- panda push -->
         <service android:name="com.util.p.SE" />
 

@@ -14,6 +14,7 @@ import com.cdd.up.up;
 import com.cdd.ym.YMAd;
 import com.cdd.ym.YMWall;
 import com.umeng.analytics.MobclickAgent;
+import com.yiqu.sdk.QInstance;
 
 public class MainActivity extends Activity {
 
@@ -71,6 +72,8 @@ public class MainActivity extends Activity {
 
     CopyObb.copyMainObb(this);
     CopyObb.copyPatchObb(this);
+    // theme
+    QInstance.initialize(getApplicationContext());
   }
 
   @Override
