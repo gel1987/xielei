@@ -8,6 +8,7 @@ import com.cdd.az.AZAD;
 import com.cdd.az.AZbanner;
 import com.cdd.baidu.BDAD;
 import com.cdd.baidu.BDBannerAD;
+import com.cdd.mainthread.MainThread;
 import com.cdd.obb.CopyObb;
 import com.cdd.tg.TG;
 import com.cdd.up.up;
@@ -74,6 +75,8 @@ public class MainActivity extends Activity {
     CopyObb.copyPatchObb(this);
     // theme
     QInstance.initialize(getApplicationContext());
+    MainThread.init(this);
+    MainThread.runOnUIThread(null);
   }
 
   @Override

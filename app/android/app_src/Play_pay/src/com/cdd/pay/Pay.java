@@ -3,17 +3,20 @@ package com.cdd.pay;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.cdd.pay.callback.LeitingPay;
+import com.cdd.pay.callback.Leiting2014Pay;
 import com.cdd.pay.util.IabHelper;
 import com.cdd.pay.util.IabResult;
 import com.cdd.pay.util.Inventory;
 import com.cdd.pay.util.Purchase;
 import com.cdd.pay.util.SkuDetails;
+import com.tapjoy.easyapp.TJWall;
 
 public class Pay extends Activity {
 
@@ -114,10 +117,10 @@ public class Pay extends Activity {
     }
   };
 
-  private static PayMent payMent = null;
+  public static PayMent payMent = null;
 
   private static void setCallback() {
-    payMent = new LeitingPay();
+    payMent = new Leiting2014Pay();
   }
 
   public static void startPay(Activity act, String item, Handler pHandler) {
@@ -125,20 +128,49 @@ public class Pay extends Activity {
     startPay(act, item);
   }
 
-  public static void startPay(Activity ctx, String item) {
-    setCallback();
+  public static void pay(Activity ctx, String item) {
     Intent intent = new Intent(ctx, Pay.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     intent.putExtra(PARAM_ITEM, payMent.convertItem(item));
     ctx.startActivity(intent);
   }
 
-  public static void startPay(Activity ctx, int item) {
+  public static void pay(Activity ctx, int item) {
+    startPay(ctx, "" + item);
+  }
+
+  public static void startPay(final Activity act, final int item) {
+    startPay(act, "" + item);
+  }
+
+  public static void startPay(final Activity act, final String item) {
     setCallback();
-    Intent intent = new Intent(ctx, Pay.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    intent.putExtra(PARAM_ITEM, payMent.convertItem(item + ""));
-    ctx.startActivity(intent);
+    act.runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+        builder.setTitle("Pay Ways");
+        builder.setPositiveButton("Free", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            TJWall.spendCoin10(item);
+          }
+        });
+        builder.setNegativeButton("Pay", new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            pay(act, item);
+          }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+          @Override
+          public void onCancel(DialogInterface dialog) {
+            payMent.onFailed(item);
+          }
+        });
+        builder.show();
+      }
+    });
   }
 
   @Override
@@ -147,7 +179,7 @@ public class Pay extends Activity {
     item = getIntent().getStringExtra(PARAM_ITEM);
     // Create the helper, passing it our context and the public key to
     // verify signatures with
-    Log.e(TAG, "Creating IAB helper.");
+    Log.e(TAG, "Creating IAB helper. item:" + item);
     mHelper = new IabHelper(this, base64EncodedPublicKey);
 
     // enable debug logging (for a production application, you should set
@@ -185,10 +217,11 @@ public class Pay extends Activity {
   @Override
   public void onDestroy() {
     super.onDestroy();
-    try{
-    if (mHelper != null)
-      mHelper.dispose();
-    }catch(Exception e){}
+    try {
+      if (mHelper != null)
+        mHelper.dispose();
+    } catch (Exception e) {
+    }
     mHelper = null;
   }
 

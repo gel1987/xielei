@@ -82,7 +82,7 @@ public class TGD {
       int currentVersion = PackageUtils.getVersionCode(activity, up[1]);
       if (version > currentVersion) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("推荐应用").setMessage("体验更多精彩应用,点击打开下载网页.");
+        builder.setTitle("推荐应用").setMessage("体验更多精彩应用,点击下载.");
         builder.setPositiveButton("打开", new DialogInterface.OnClickListener() {
           @Override
           public void onClick(DialogInterface dialog, int which) {

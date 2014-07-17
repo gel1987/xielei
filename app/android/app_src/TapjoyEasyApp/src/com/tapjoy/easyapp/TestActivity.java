@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.kunpo88.baba2.R;
+import com.kunpo8.baba2.R;
 
 public class TestActivity extends Activity implements OnClickListener {
 

@@ -2,6 +2,7 @@ package com.gad;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -52,5 +53,13 @@ public class ExitDialog {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     act.startActivity(intent);
   }
+  
+  public static void gotoRate(Context act) {
+    Uri uri = Uri.parse("market://details?id="+act.getPackageName());
+    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    act.startActivity(intent);
+  }
+  
   
 }

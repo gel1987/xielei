@@ -15,6 +15,7 @@
 
 package test.test;
 
+import test.kunpo8.baba.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -28,7 +29,6 @@ import com.cdd.pay.util.IabHelper;
 import com.cdd.pay.util.IabResult;
 import com.cdd.pay.util.Inventory;
 import com.cdd.pay.util.Purchase;
-import com.kunpo8.baba.R;
 
 /**
  * Example game using in-app billing version 3.

@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kunpo88.baba2.R;
+import com.kunpo8.baba2.R;
 import com.tapjoy.TJError;
 import com.tapjoy.TJEvent;
 import com.tapjoy.TJEventCallback;

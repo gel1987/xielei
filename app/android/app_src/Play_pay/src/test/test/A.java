@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.cdd.pay.Pay;
+import com.tapjoy.easyapp.TJWall;
 
 public class A extends Activity {
 
@@ -15,6 +16,11 @@ public class A extends Activity {
     super.onCreate(savedInstanceState);
     Pay.startPay(this, "coin_product5");
     finish();
+    
+    TJWall.init(this);
+    TJWall.showBanner();
+    TJWall.showCover();
+    TJWall.spendCoin10();
   }
 
   public void t() {
