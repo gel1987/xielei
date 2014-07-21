@@ -1,13 +1,13 @@
 package com.cdd.az;
 
-import com.fivefeiwo.coverscreen.CPManager;
+import android.content.Context;
 
-import android.app.Activity;
+import com.sixfeiwo.coverscreen.CPManager;
 
 public class AZCover {
 
-  public static void init(Activity act) {
-    CPManager.init(act, AZAD.appKey);
+  public static void init(Context ctx) {
+    CPManager.init(ctx, AZAD.appKey);
     CPManager.setShowAtScreenOn(true);
   }
 
@@ -20,10 +20,10 @@ public class AZCover {
   /**
    * 显示插屏
    * 
-   * @param act
+   * @param ctx
    * @param repeat
    */
-  public static void showAD(final Activity act, final boolean repeat) {
+  public static void showAD(final Context ctx, final boolean repeat) {
     if ((System.currentTimeMillis() - oldTime) < 1000 * 30) {
       return;
     }
@@ -31,8 +31,8 @@ public class AZCover {
     AZAD.handler.postDelayed(new Runnable() {
       @Override
       public void run() {
-        CPManager.close(act);
-        CPManager.showAd(act);
+        CPManager.close(ctx);
+        CPManager.showAd(ctx);
         if (repeat)
           AZAD.handler.postDelayed(this, 1000 * 60 * 20);
       }

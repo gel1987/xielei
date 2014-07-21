@@ -14,6 +14,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.util.Log;
 import dalvik.system.DexClassLoader;
 
 @SuppressWarnings("rawtypes")
@@ -30,6 +31,7 @@ public class LockApplication extends Application {
   private static boolean isRecopyDex = false;
 
   protected void attachBaseContext(Context base) {
+    Log.e(TAG, "attachBaseContext");
     super.attachBaseContext(base);
     try {
       File odex = this.getDir(ODEX_NAME, MODE_PRIVATE);
@@ -59,6 +61,8 @@ public class LockApplication extends Application {
   }
 
   public void onCreate() {
+    Log.e(TAG, "onCreate");
+    DexUtil.encrpt();
     // 如果源应用配置有Appliction对象，则替换为源应用Applicaiton，以便不影响源程序逻辑。
     String applicationName = null;
     try {

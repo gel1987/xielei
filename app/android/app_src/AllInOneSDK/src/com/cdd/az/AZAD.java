@@ -1,6 +1,7 @@
 package com.cdd.az;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +25,14 @@ public class AZAD {
 
   public static void init(Activity act) {
     activity = act;
+    String key = MetaDataUtil.getApplicationMetaData(act, "anzhikey");
+    if (key != null) {
+      appKey = key;
+    }
+    initCover(act);
+  }
+
+  public static void initCoverWithKey(Context act) {
     String key = MetaDataUtil.getApplicationMetaData(act, "anzhikey");
     if (key != null) {
       appKey = key;
@@ -159,7 +168,7 @@ public class AZAD {
    * 
    * @param act
    */
-  public static void initCover(final Activity act) {
+  public static void initCover(Context act) {
     // 应用启动时，初始化广告组件，
     AZCover.init(act);
   }

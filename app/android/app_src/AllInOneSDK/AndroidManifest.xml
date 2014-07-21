@@ -160,30 +160,27 @@
 
         <!-- anzhi banner -->
         <!-- anzhi cover -->
-        <activity
-            android:name="com.fivefeiwo.coverscreen.SA"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
-        </activity>
-        <activity
-            android:name="com.fivefeiwo.coverscreen.WA"
-            android:launchMode="singleInstance" >
-        </activity>
-
-        <receiver android:name="com.fivefeiwo.coverscreen.SR" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="broadcast.route.control" />
-            </intent-filter>
-        </receiver>
+        <receiver android:name="com.sixfeiwo.coverscreen.SR">
+			<intent-filter>
+			<action android:name="android.intent.action.PACKAGE_ADDED"/>
+			<action android:name="android.intent.action.PACKAGE_REMOVED"/>
+			<data android:scheme="package"/>
+			</intent-filter>
+			<intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+			<action android:name="android.intent.action.USER_PRESENT"/>   
+			<action android:name="broadcast.route.control"/>
+			</intent-filter>
+		</receiver>
+        <activity android:name="com.sixfeiwo.coverscreen.SA" 
+             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+             android:excludeFromRecents="true"
+             android:launchMode="singleInstance">
+        </activity>  
+        <activity android:name="com.sixfeiwo.coverscreen.WA"
+             android:launchMode="singleInstance">
+        </activity> 
+        
         <!-- anzhi cover -->
 
 

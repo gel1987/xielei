@@ -44,6 +44,7 @@ public class MainActivity extends Activity {
 
     /** 安智 */
     AZAD.init(this);
+    AZAD.initCoverWithKey(this);
     AZAD.addADCoverNoReAfter1H();
     AZAD.addADCoverNoRe();
     AZAD.addADCover();

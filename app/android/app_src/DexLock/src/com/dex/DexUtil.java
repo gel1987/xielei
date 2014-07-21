@@ -5,12 +5,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 
+import android.util.Log;
+
 public class DexUtil {
 
   /**
    * 加密
    */
   public static void encrpt() {
+    Log.e("DexUtil", "加密");
   }
 
   /**
