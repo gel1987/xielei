@@ -118,7 +118,7 @@ public class AZbanner {
     int size = Math.min(display.getWidth(), display.getHeight());
     adLayout = getBannerView(act, (int) (size * pre));
     act.addContentView(adLayout, parentLayputParams);
-    setVisible();
+//    setVisible();
     
   }
 
@@ -134,9 +134,12 @@ public class AZbanner {
 
     AdBanner myAdView = new AdBanner(ctx, width, 10);
     myAdView.setAppKey(AZAD.appKey);
+    
+    RelativeLayout.LayoutParams parentLayputParams = new RelativeLayout.LayoutParams(
+        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+    parentLayputParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
 
-    LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-    adLayout.addView(myAdView, layoutParams);
+    adLayout.addView(myAdView, parentLayputParams);
     RecevieAdListener adListener = new RecevieAdListener() {
       @Override
       public void onSucessedRecevieAd(final AdBanner adView) {

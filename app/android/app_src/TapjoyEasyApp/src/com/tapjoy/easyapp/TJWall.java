@@ -153,6 +153,7 @@ public class TJWall {
     handler.post(new Runnable() {
       @Override
       public void run() {
+        try{
         // Show the Offers web view from where users can download the latest
         // offers for virtual currency.
         TapjoyConnect.getTapjoyConnectInstance().showOffers(new TapjoyOffersNotifier() {
@@ -164,6 +165,7 @@ public class TJWall {
           public void getOffersResponseFailed(String error) {
           }
         });
+        }catch(Exception e){}
       }
     });
   }

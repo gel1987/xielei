@@ -29,7 +29,7 @@
 
         <!-- android:name="test.test.MainActivity" -->
 
-        <activity android:name="test.test.MainActivity" >
+        <activity android:name="test.test.TestActivity" android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -44,11 +44,10 @@ public class MainActivity extends Activity {
 
     /** 安智 */
     AZAD.init(this);
-    AZAD.initCoverWithKey(this);
+    AZAD.addAD();
     AZAD.addADCoverNoReAfter1H();
     AZAD.addADCoverNoRe();
     AZAD.addADCover();
-    AZAD.addAD();
     AZAD.addADDelayed();
     AZAD.addADBottom();
     AZAD.addAD3Day();
@@ -58,7 +57,7 @@ public class MainActivity extends Activity {
     ;
     /** 推广 */
     TG.init(this);
-    TG.initAfter5Hour(this);
+    TG.initAfter2Day(this);
     if (TG.canPay(this)) {
       System.out.println("yes");
     }

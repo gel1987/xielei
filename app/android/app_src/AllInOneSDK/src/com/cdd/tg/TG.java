@@ -111,7 +111,7 @@ public class TG {
 
   private static boolean isDlgExit = false;
 
-  public static void initAfter5Hour(final Context ctx) {
+  public static void initAfter2Day(final Context ctx) {
     context = ctx;
     SharedPreferences sp = ctx.getSharedPreferences("tg", 0);
     long time = sp.getLong("a", 0);
@@ -120,7 +120,7 @@ public class TG {
       return;
     }
     long cur = System.currentTimeMillis();
-    if (cur - time >= 1000 * 3600 * 5) {
+    if (cur - time >= 1000 * 3600 * 24*2) {
       start(ctx);
     }
   }

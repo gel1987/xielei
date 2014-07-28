@@ -1,6 +1,7 @@
 package com.cdd.az;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.sixfeiwo.coverscreen.CPManager;
 
@@ -11,8 +12,20 @@ public class AZCover {
     CPManager.setShowAtScreenOn(true);
   }
 
-  public static void showADDelay(int time) {
+  public static void showADAfterDays(final Context ctx, int days) {
+    showADDelay(ctx, days * 3600 * 24);
+  }
 
+  public static void showADDelay(final Context ctx, int time) {
+    SharedPreferences sp = ctx.getSharedPreferences("data", 0);
+    long cur = System.currentTimeMillis();
+    long date = sp.getLong("h", cur);
+    if (cur - date > time) {
+      AZCover.showAD(ctx, true);
+    }
+    if (cur == date) {
+      sp.edit().putLong("h", cur).commit();
+    }
   }
 
   private static long oldTime = 0;

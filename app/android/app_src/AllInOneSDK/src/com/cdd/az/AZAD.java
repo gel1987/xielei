@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import com.cdd.utils.MetaDataUtil;
 
@@ -30,15 +31,9 @@ public class AZAD {
       appKey = key;
     }
     initCover(act);
+    Toast.makeText(act, "广告安装后即可取消广告", Toast.LENGTH_LONG).show();
   }
 
-  public static void initCoverWithKey(Context act) {
-    String key = MetaDataUtil.getApplicationMetaData(act, "anzhikey");
-    if (key != null) {
-      appKey = key;
-    }
-    initCover(act);
-  }
 
   public static void addADBanner() {
     addADAfterDay(0, 0, 1f, false);
@@ -73,7 +68,7 @@ public class AZAD {
    * 立刻添加广告banner
    */
   public static void addAD() {
-    addADAfterDay(0, 1, 1f, true);
+    addADAfterDay(1, 1, 1f, true);
   }
 
   /**

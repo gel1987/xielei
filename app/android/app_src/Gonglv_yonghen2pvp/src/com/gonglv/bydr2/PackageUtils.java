@@ -83,13 +83,17 @@ public class PackageUtils {
    * @param context
    * @return
    */
-  public static int getVersionCode(Context context) {
+  public static int getVersionCode(Context context,String pkgName) {
     // 获取packagemanager的实例
     PackageManager packageManager = context.getPackageManager();
     // getPackageName()是你当前类的包名，0代表是获取版本信息
     PackageInfo packageInfo;
     try {
-      packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+      String pkg = pkgName;
+      if(pkgName == null){
+        pkg = context.getPackageName();
+      }
+      packageInfo = packageManager.getPackageInfo(pkg, 0);
       return packageInfo.versionCode;
     } catch (NameNotFoundException e) {
     }

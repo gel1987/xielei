@@ -649,6 +649,8 @@ public class IabHelper {
           inv = queryInventory(querySkuDetails, moreSkus);
         } catch (IabException ex) {
           result = ex.getResult();
+        }catch(Exception e){
+          result = new IabResult(BILLING_RESPONSE_RESULT_ERROR,"Error");
         }
 
         flagEndAsync();

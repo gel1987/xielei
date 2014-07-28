@@ -453,6 +453,10 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 							// Your app must call either callback.completed() or callback.cancelled() to complete the lifecycle of the request
 						    request.callback.completed();
 						}
+
+            @Override
+            public void contentIsReady(TJEvent arg0, int arg1) {
+            }
 					});
 					
 					// By default, ad content will be shown automatically on a successful send. For finer control of when content should be shown, call:

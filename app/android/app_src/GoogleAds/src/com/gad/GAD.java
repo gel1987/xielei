@@ -21,7 +21,7 @@ public class GAD {
   private static long oldTime = 0;
 
   public static void showCover(Activity ctx) {
-    if ((System.currentTimeMillis() - oldTime) > 1000 * 30) {
+    if ((System.currentTimeMillis() - oldTime) > 1000 * 180) {
       ADCover.init(ctx);
       oldTime = System.currentTimeMillis();
     }
