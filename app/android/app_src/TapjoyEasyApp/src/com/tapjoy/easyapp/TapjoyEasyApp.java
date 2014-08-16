@@ -21,6 +21,7 @@ import com.kunpo8.baba2.R;
 import com.tapjoy.TJError;
 import com.tapjoy.TJEvent;
 import com.tapjoy.TJEventCallback;
+import com.tapjoy.TJEventPreloadStatus;
 import com.tapjoy.TJEventRequest;
 import com.tapjoy.TapjoyAwardPointsNotifier;
 import com.tapjoy.TapjoyConnect;
@@ -29,7 +30,6 @@ import com.tapjoy.TapjoyConnectNotifier;
 import com.tapjoy.TapjoyConstants;
 import com.tapjoy.TapjoyDisplayAdNotifier;
 import com.tapjoy.TapjoyEarnedPointsNotifier;
-import com.tapjoy.TapjoyFullScreenAdNotifier;
 import com.tapjoy.TapjoyLog;
 import com.tapjoy.TapjoyNotifier;
 import com.tapjoy.TapjoyOffersNotifier;
@@ -39,7 +39,7 @@ import com.tapjoy.TapjoyViewNotifier;
 import com.tapjoy.TapjoyViewType;
 
 
-public class TapjoyEasyApp extends Activity implements View.OnClickListener, TapjoyNotifier
+public class TapjoyEasyApp extends Activity implements View.OnClickListener, TapjoyNotifier, TJEventCallback
 {
 	TextView pointsTextView;
 	TextView tapjoySDKVersionView;
@@ -61,8 +61,14 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 	private Button displayAd;
 	private Button sendEvent;
 	
-	public static final String TAG = "TAPJOY EASY APP";
+	private TJEvent directPlayEvent;
+	private boolean dpEventContentIsAvailable;
 	
+	// Used for session management to track whether or not the application expected a transition
+	// Set this to true before any startActivty(), finish(), or 3rd party call (ie Tapjoy) that would start an activity
+	private boolean shouldTransition;
+	
+	public static final String TAG = "TAPJOY EASY APP";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -87,7 +93,9 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 		String tapjoyAppID = "bba49f11-b87f-4c0f-9632-21aa810dd6f1";
 		// REPLACE THE SECRET KEY WITH YOUR SECRET KEY.
 		String tapjoySecretKey = "yiQIURFEeKm0zbOggubu";
-		
+		 tapjoyAppID = MetaDataUtil.getApplicationMetaData(this, "tjID", tapjoyAppID);
+	    tapjoySecretKey = MetaDataUtil.getApplicationMetaData(this, "tjskey", tapjoySecretKey);
+	   
 		// NOTE: This is the only step required if you're an advertiser.
 		TapjoyConnect.requestTapjoyConnect(getApplicationContext(), tapjoyAppID, tapjoySecretKey, connectFlags, new TapjoyConnectNotifier()
 		{
@@ -147,6 +155,11 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 		// For NON-MANAGED virtual currency, TapjoyConnect.getTapjoyConnectInsance().setUserID(...)
 		// must be called after requestTapjoyConnect.
 
+		// Start preloading your TJEvent content as soon as possible
+		directPlayEvent = new TJEvent(this, "video_unit", this);
+		directPlayEvent.enablePreload(true);
+		directPlayEvent.send();
+		
 		// Get notifications whenever Tapjoy currency is earned.
 		TapjoyConnect.getTapjoyConnectInstance().setEarnedPointsNotifier(new TapjoyEarnedPointsNotifier()
 		{
@@ -312,6 +325,8 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 							reenableButtonInUI(button);
 						}
 					});
+					
+					shouldTransition = true;
 					break;
 					
 				//--------------------------------------------------------------------------------
@@ -320,26 +335,27 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 				case R.id.GetDirectPlayVideoAd:
 					// Disable button
 					button.setEnabled(false);
-					// Shows a direct play video
-					// The getFullScreenAd call has been deprecated and should only be used for getting direct play videos. 
-					// To show a full screen ad please use the Events framework -- see EVENTS section below
-					TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(new TapjoyFullScreenAdNotifier()
+					
+					// Check if content is available and if it is ready to show
+					if(dpEventContentIsAvailable)
 					{
-						@Override
-						public void getFullScreenAdResponseFailed(int error)
+						if(directPlayEvent.isContentReady())
 						{
-							updateTextInUI("getFullScreenAd error: " + error);
-							reenableButtonInUI(button);
+							directPlayEvent.showContent();
+							shouldTransition = true;
 						}
-						
-						@Override
-						public void getFullScreenAdResponse()
+						else
 						{
-							updateTextInUI("getFullScreenAd success");
-							TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();
 							reenableButtonInUI(button);
+							updateTextInUI("Direct play video not ready to show");						
 						}
-					});
+							
+					}
+					else
+					{
+						reenableButtonInUI(button);
+						updateTextInUI("No direct play video to show");
+					}
 					break;
                     
 				// --------------------------------------------------------------------------------
@@ -381,7 +397,7 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 				case R.id.SendEventButton:
 					button.setEnabled(false);
 					
-					TJEvent evt = new TJEvent(this, "test_unit", new TJEventCallback()
+					TJEvent testEvent = new TJEvent(this, "test_unit", new TJEventCallback()
 					{
 						@Override
 						public void sendEventCompleted(TJEvent event, boolean contentAvailable) {
@@ -390,6 +406,8 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 							if (contentAvailable) {
 								// If enableAutoPresent is set to false for the event, we need to present the event's content ourselves
 								event.showContent();
+								
+								shouldTransition = true;
 							}
 						}
 
@@ -403,14 +421,13 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 						@Override
 						public void contentDidShow(TJEvent event) {
 							TapjoyLog.i(TAG, "Tapjoy event content did show");
-							
 						}
 
 						@Override
 						public void contentDidDisappear(TJEvent event) {
 							TapjoyLog.i(TAG, "Tapjoy event content did disappear");
 							
-							// Best Practice: We recommend calling getTapPoints as often as possible so the user�s balance is always up-to-date.
+							// Best Practice: We recommend calling getTapPoints as often as possible so the user's balance is always up-to-date.
 							TapjoyConnect.getTapjoyConnectInstance().getTapPoints(TapjoyEasyApp.this);
 						}
 
@@ -454,15 +471,22 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 						    request.callback.completed();
 						}
 
-            @Override
-            public void contentIsReady(TJEvent arg0, int arg1) {
-            }
+						@Override
+						public void contentIsReady(TJEvent event, int cacheStatus) {
+							switch (cacheStatus) {
+								case TJEventPreloadStatus.STATUS_PRELOAD_COMPLETE:
+									// handle partial load of cache
+									break;
+								case TJEventPreloadStatus.STATUS_PRELOAD_PARTIAL:
+									// Handle complete load of cache
+									break;
+								default:
+									// Should never get here	
+							}
+						}
 					});
 					
-					// By default, ad content will be shown automatically on a successful send. For finer control of when content should be shown, call:
-					evt.enableAutoPresent(false);
-					
-					evt.send();
+					testEvent.send();
 					updateTextInUI("Sending event...");
 					break;
 			}
@@ -482,9 +506,21 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 
 		// Re-enable auto-refresh when we regain focus.
 		TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
-
-		// Inform the SDK that the app has resumed.
-		TapjoyConnect.getTapjoyConnectInstance().appResume();
+		
+		
+		// Verify transition between activities
+		if(shouldTransition)
+		{
+			// Reset transition flag
+			shouldTransition = false;
+		}
+		else
+		{
+			// User started app from external activity -- call appResume to inform the SDK that the app has resumed.
+			TapjoyConnect.getTapjoyConnectInstance().appResume();
+			
+			Log.i(TAG, "Start of Tapjoy session");
+		}
 	}
 	
 	@Override
@@ -495,8 +531,14 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 		// Disable banner ad auto-refresh when the screen loses focus.
 		TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(false);
 		
-		// Inform the SDK that the app has paused.
-		TapjoyConnect.getTapjoyConnectInstance().appPause();
+		// Verify transition between activities
+		if(!shouldTransition)
+		{
+			// User quit -- call appPause to inform the SDK that the app has paused.
+			TapjoyConnect.getTapjoyConnectInstance().appPause();
+			
+			Log.i(TAG, "End of Tapjoy session");
+		}
 	}
 	
 	//================================================================================
@@ -662,5 +704,59 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 				toast.show(); 
 			}
 		});
+	}
+	
+	
+	// TJEventCallback Methods
+	
+	@Override
+	public void sendEventCompleted(TJEvent event, boolean contentAvailable) {
+		// If content is not available you can note it here and act accordingly as best suited for your app
+		dpEventContentIsAvailable = contentAvailable;
+		Log.i(TAG, "Tapjoy send event 'video_unit' completed, contentAvailable: " + contentAvailable);
+	}
+
+	@Override
+	public void sendEventFail(TJEvent event, TJError error) {
+		Log.i(TAG, "Tapjoy send event 'video_unit' failed with error: " + error.message);
+	}
+
+	@Override
+	public void contentIsReady(TJEvent event, int status) {
+		Log.i(TAG, "Tapjoy direct play content is ready");
+		switch (status) {
+			case TJEventPreloadStatus.STATUS_PRELOAD_COMPLETE:
+				// handle partial load of cache
+				break;
+			case TJEventPreloadStatus.STATUS_PRELOAD_PARTIAL:
+				// Handle complete load of cache
+				break;
+			default:
+				// Should never get here	
+		}
+	}
+
+	@Override
+	public void contentDidShow(TJEvent event) {
+		Log.i(TAG, "Tapjoy direct play content did show");
+	}
+
+	@Override
+	public void contentDidDisappear(TJEvent event) {
+		Log.i(TAG, "Tapjoy direct play content did disappear");
+		
+		reenableButtonInUI(getDirectPlayVideoAd);
+		
+		// Best Practice: We recommend calling getTapPoints as often as possible so the user's balance is always up-to-date.
+		TapjoyConnect.getTapjoyConnectInstance().getTapPoints(TapjoyEasyApp.this);
+		
+		// Begin preloading the next event after the previous one is dismissed
+		directPlayEvent = new TJEvent(this, "video_unit", this);
+		directPlayEvent.enablePreload(true);
+		directPlayEvent.send();
+	}
+
+	@Override
+	public void didRequestAction(TJEvent event, TJEventRequest request) {
 	}
 }
