@@ -7,9 +7,11 @@ import java.util.Date;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 import com.cdd.utils.Callback;
 import com.cdd.utils.DateUtil;
+import com.cdd.utils.FileUtil;
 import com.cdd.utils.HttpUtils;
 import com.cdd.utils.InputStreamParser;
 
@@ -24,6 +26,46 @@ public class FreeTime {
         freeT(ctx);
       }
     }.start();
+  }
+
+  private static final String freeKey = "frrek";
+
+  public static void freeHour(Context ctx) {
+    free(ctx, 2 * 3600 * 1000);
+  }
+
+  public static void free(final Context ctx, final long times) {
+    String freeTime = FileUtil.getFixedInfo(ctx, freeKey);
+    if (TextUtils.isEmpty(freeTime)) {
+      Callback callback = new Callback() {
+        @Override
+        public void callback(Object obj) {
+          try {
+            Long date = (Long) obj;
+            FileUtil.saveFixedInfo(ctx, freeKey, "" + date);
+          } catch (Exception e) {
+            System.exit(0);
+          }
+        }
+      };
+      DateUtil.getNetDate(callback);
+    } else {
+      Callback callback = new Callback() {
+        @Override
+        public void callback(Object obj) {
+          try {
+            Long date = (Long) obj;
+            String time = FileUtil.getFixedInfo(ctx, freeKey);
+            if (Math.abs(date - Long.valueOf(time)) > times) {
+              System.exit(0);
+            }
+          } catch (Exception e) {
+            FileUtil.saveFixedInfo(ctx, freeKey, "" + obj);
+          }
+        }
+      };
+      DateUtil.getNetDate(callback);
+    }
   }
 
   public static void freeT(Context ctx) {
