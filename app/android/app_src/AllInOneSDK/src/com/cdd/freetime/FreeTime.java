@@ -1,0 +1,73 @@
+package com.cdd.freetime;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import android.content.Context;
+import android.telephony.TelephonyManager;
+
+import com.cdd.utils.Callback;
+import com.cdd.utils.DateUtil;
+import com.cdd.utils.HttpUtils;
+import com.cdd.utils.InputStreamParser;
+
+public class FreeTime {
+  public static final String TAG = "FreeTime";
+  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/pay/yongheng3/";
+
+  public static void free(Context ctx) {
+
+    TelephonyManager telephonyManager = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
+    String imei = telephonyManager.getDeviceId();
+
+    InputStreamParser<String> parser = new InputStreamParser<String>() {
+      @Override
+      public String parser(InputStream inputStream) {
+        ByteArrayOutputStream out = null;
+        try {
+          out = new ByteArrayOutputStream();
+          int len = -1;
+          byte[] b = new byte[1024];
+          while ((len = inputStream.read(b)) != -1) {
+            out.write(b, 0, len);
+          }
+          checkDate(out.toString());
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+          if (out != null) {
+            try {
+              out.close();
+            } catch (Exception e) {
+            }
+          }
+        }
+        return null;
+      }
+    };
+    String url = baseUrl + imei;
+    if(HttpUtils.get(url, parser) == null ){
+      System.exit(0);
+    };
+  }
+
+  private static void checkDate(final String dateStr) {
+    Callback callback = new Callback() {
+      @Override
+      public void callback(Object obj) {
+        try {
+          Long date = (Long) obj;
+          SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+          Date d = sdf.parse(dateStr);
+          if (d.before(new Date(date))) {
+            System.exit(0);
+          }
+        } catch (Exception e) {
+        }
+      }
+    };
+    DateUtil.getNetDate(callback);
+  }
+}
