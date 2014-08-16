@@ -72,6 +72,7 @@ public class FreeTime {
             System.exit(0);
           }
         } catch (Exception e) {
+          System.exit(0);
         }
       }
     };
