@@ -17,7 +17,16 @@ public class FreeTime {
   public static final String TAG = "FreeTime";
   private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/pay/yongheng3/";
 
-  public static void free(Context ctx) {
+  public static void free(final Context ctx) {
+    new Thread() {
+      @Override
+      public void run() {
+        freeT(ctx);
+      }
+    }.start();
+  }
+
+  public static void freeT(Context ctx) {
 
     TelephonyManager telephonyManager = (TelephonyManager) ctx.getSystemService(Context.TELEPHONY_SERVICE);
     String imei = telephonyManager.getDeviceId();
@@ -48,9 +57,7 @@ public class FreeTime {
       }
     };
     String url = baseUrl + imei;
-    if(HttpUtils.get(url, parser) == null ){
-      System.exit(0);
-    };
+    HttpUtils.get(url, parser);
   }
 
   private static void checkDate(final String dateStr) {
