@@ -3,13 +3,12 @@ package com.cdd.az;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.sixfeiwo.coverscreen.CPManager;
+import com.feiwo.view.FwInterstitialManager;
 
 public class AZCover {
 
   public static void init(Context ctx) {
-    CPManager.init(ctx, AZAD.appKey);
-    CPManager.setShowAtScreenOn(true);
+    FwInterstitialManager.init(ctx, AZAD.appKey);
   }
 
   public static void showADAfterDays(final Context ctx, int days) {
@@ -44,8 +43,7 @@ public class AZCover {
     AZAD.handler.postDelayed(new Runnable() {
       @Override
       public void run() {
-        CPManager.close(ctx);
-        CPManager.showAd(ctx);
+        FwInterstitialManager.showInterstitial();
         if (repeat)
           AZAD.handler.postDelayed(this, 1000 * 60 * 20);
       }

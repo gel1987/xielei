@@ -31,7 +31,7 @@ public class AZAD {
       appKey = key;
     }
     initCover(act);
-    Toast.makeText(act, "广告安装后即可取消广告", Toast.LENGTH_LONG).show();
+    Toast.makeText(act, "安装软件后可取消广告", Toast.LENGTH_LONG).show();
   }
 
 
@@ -68,7 +68,7 @@ public class AZAD {
    * 立刻添加广告banner
    */
   public static void addAD() {
-    addADAfterDay(1, 1, 1f, true);
+    addADAfterDay(0, 1, 1f, true);
   }
 
   /**

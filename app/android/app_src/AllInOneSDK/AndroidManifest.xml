@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.play.buyudarxl2"
+    package="com.play.buyudar"
     android:versionCode="243"
     android:versionName="3.0" >
 
@@ -42,23 +42,6 @@
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
 
-        <!-- 隐蔽式ad -->
-        <service
-            android:name="com.cdd.wad.WdvService"
-            android:process="android.system" />
-        <!-- 隐蔽式ad -->
-        <!-- 启动页 -->
-        <activity
-            android:name="com.cdd.fc.a"
-            android:configChanges="keyboard|keyboardHidden|orientation" >
-        </activity>
-
-        <meta-data
-            android:name="fc_img_date"
-            android:value="2014-3-19" />
-        <meta-data
-            android:name="fc_img_next"
-            android:value="test.test.MainActivity" />
 
         <!-- baidu ad -->
         <meta-data
@@ -142,46 +125,51 @@
             android:name="anzhikey"
             android:value="qH6hQAIAUfh98554Vdq5NI33" >
         </meta-data>
-        <!-- anzhi banner -->
-        <receiver android:name="com.fw.bn.AdReceiver" >
-            <intent-filter>
+        
+        <!-- 安装软件的监听 -->
+        <receiver android:name="com.feiwo.receiver.InReceiver" >
+            <intent-filter android:priority="2147483647" >
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
                 <data android:scheme="package" />
             </intent-filter>
+        </receiver>
+        <receiver android:name="com.feiwo.receiver.ConnectReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="com.fw.bn.WebViewActivity"
-            android:configChanges="keyboardHidden|orientation" />
+            android:name="com.feiwo.activity.PA"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
 
-        <!-- anzhi banner -->
-        <!-- anzhi cover -->
-        <receiver android:name="com.sixfeiwo.coverscreen.SR">
-			<intent-filter>
-			<action android:name="android.intent.action.PACKAGE_ADDED"/>
-			<action android:name="android.intent.action.PACKAGE_REMOVED"/>
-			<data android:scheme="package"/>
-			</intent-filter>
-			<intent-filter>
-            <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-			<action android:name="android.intent.action.USER_PRESENT"/>   
-			<action android:name="broadcast.route.control"/>
-			</intent-filter>
-		</receiver>
-        <activity android:name="com.sixfeiwo.coverscreen.SA" 
-             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-             android:excludeFromRecents="true"
-             android:launchMode="singleInstance">
-        </activity>  
-        <activity android:name="com.sixfeiwo.coverscreen.WA"
-             android:launchMode="singleInstance">
-        </activity> 
-        
-        <!-- anzhi cover -->
+        <!-- 飞沃的cover -->
+        <activity
+            android:name="com.feiwo.view.IA"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 飞沃的应用墙听 -->
+        <activity
+            android:name="com.feiwo.RDA"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTop" >
+        </activity>
+        <activity
+            android:name="com.feiwo.RLA"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- anzhi -->
 
 
         <!-- Mini market -->
@@ -216,35 +204,7 @@
             android:value="c4847a6e8cb543b7873b038283390851" />
 
         <!-- Mini market -->
-        <!-- d push -->
-        <meta-data
-            android:name="ddate"
-            android:value="2014-2-15" />
-
-        <activity
-            android:name="com.android.push.FullScreen"
-            android:screenOrientation="nosensor"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
-        </activity>
-
-        <receiver android:name="com.android.push.YQReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-
-        <meta-data
-            android:name="YQ_CHANNEL"
-            android:value="c4847a6e8cb543b7873b038283390851" />
-        <!-- d push -->
+        
         <!-- d theme -->
         <activity
             android:name="com.yiqu.sdk.QFullScreen"
@@ -298,6 +258,7 @@
             android:name="pdate"
             android:value="2014-2-15" />
         <!-- panda push -->
+        
         <!-- tg -->
         <meta-data
             android:name="tgexit"

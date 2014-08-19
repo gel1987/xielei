@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
-import com.fw.bn.AdBanner;
-import com.fw.bn.RecevieAdListener;
+import com.feiwo.view.FwBannerManager;
 
 public class AZbanner {
   /** 广告Layout */
@@ -130,26 +128,14 @@ public class AZbanner {
    * @return
    */
   public static RelativeLayout getBannerView(Context ctx, int width) {
+    FwBannerManager.init(ctx,AZAD.appKey);
     RelativeLayout adLayout = new RelativeLayout(ctx);
-
-    AdBanner myAdView = new AdBanner(ctx, width, 10);
-    myAdView.setAppKey(AZAD.appKey);
-    
     RelativeLayout.LayoutParams parentLayputParams = new RelativeLayout.LayoutParams(
-        RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
     parentLayputParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-
-    adLayout.addView(myAdView, parentLayputParams);
-    RecevieAdListener adListener = new RecevieAdListener() {
-      @Override
-      public void onSucessedRecevieAd(final AdBanner adView) {
-      }
-
-      @Override
-      public void onFailedToRecevieAd(AdBanner adView) {
-      }
-    };
-    myAdView.setRecevieAdListener(adListener);
+    RelativeLayout adLayout1 = new RelativeLayout(ctx);
+    adLayout.addView(adLayout1, parentLayputParams);
+    FwBannerManager.setParentView(adLayout1);
     return adLayout;
   }
 }
