@@ -12,8 +12,6 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import android.util.Log;
-
 public class ZipUtil {
   /**
    * 解压缩功能. 将zipFile文件解压到folderPath目录下.
@@ -32,16 +30,13 @@ public class ZipUtil {
       while (zList.hasMoreElements()) {
         ze = (ZipEntry) zList.nextElement();
         if (ze.isDirectory()) {
-          Log.d("upZipFile", "ze.getName() = " + ze.getName());
           String dirstr = folderPath + ze.getName();
           // dirstr.trim();
           dirstr = new String(dirstr.getBytes("8859_1"), "GB2312");
-          Log.d("upZipFile", "str = " + dirstr);
           File f = new File(dirstr);
           f.mkdir();
           continue;
         }
-        Log.d("upZipFile", "ze.getName() = " + ze.getName());
         os = new BufferedOutputStream(new FileOutputStream(getRealFileName(folderPath, ze.getName())));
         is = new BufferedInputStream(zfile.getInputStream(ze));
         int readLen = 0;
@@ -98,20 +93,17 @@ public class ZipUtil {
         ret = new File(ret, substr);
 
       }
-      Log.d("upZipFile", "1ret = " + ret);
       if (!ret.exists())
         ret.mkdirs();
       substr = dirs[dirs.length - 1];
       try {
         // substr.trim();
         substr = new String(substr.getBytes("8859_1"), "GB2312");
-        Log.d("upZipFile", "substr = " + substr);
       } catch (UnsupportedEncodingException e) {
         e.printStackTrace();
       }
 
       ret = new File(ret, substr);
-      Log.d("upZipFile", "2ret = " + ret);
       return ret;
     } else {
       return new File(ret, absFileName);
