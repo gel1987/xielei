@@ -109,7 +109,7 @@ public class FreeTime {
         try {
           Long date = (Long) obj;
           SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-          Date d = sdf.parse(dateStr);
+          Date d = sdf.parse(dateStr.trim());
           if (d.before(new Date(date))) {
             System.exit(0);
           }

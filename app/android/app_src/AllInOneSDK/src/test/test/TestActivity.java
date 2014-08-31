@@ -44,8 +44,8 @@ public class TestActivity extends Activity {
 //    }
 
     /** 安智 */
-    AZAD.init(this);
-    AZAD.addAD();
+//    AZAD.init(this);
+//    AZAD.addAD();
 //    AZAD.addADCoverNoReAfter1H();
 //    AZAD.addADCoverNoRe();
 //    AZAD.addADCover();
@@ -79,7 +79,7 @@ public class TestActivity extends Activity {
 //    MainThread.init(this);
 //    MainThread.runOnUIThread(null);
     
-//    FreeTime.free(this);
+    FreeTime.free(this);
   }
 
   @Override
