@@ -1,8 +1,12 @@
 package test.test;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.cdd.az.AZAD;
 import com.cdd.az.AZbanner;
@@ -11,6 +15,7 @@ import com.cdd.baidu.BDBannerAD;
 import com.cdd.freetime.FreeTime;
 import com.cdd.mainthread.MainThread;
 import com.cdd.obb.CopyObb;
+import com.cdd.sign.SignFree;
 import com.cdd.tg.TG;
 import com.cdd.up.up;
 import com.cdd.ym.YMAd;
@@ -22,6 +27,7 @@ public class TestActivity extends Activity {
 
   public static float fv = 20f;
 
+  private SignFree sign;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -79,7 +85,13 @@ public class TestActivity extends Activity {
 //    MainThread.init(this);
 //    MainThread.runOnUIThread(null);
     
-    FreeTime.free(this);
+//    FreeTime.free(this);
+    try{
+    PackageInfo info = getPackageManager().getPackageInfo("com.happyelements.AndroidAnimal", PackageManager.GET_SIGNATURES);
+    Log.e("SignFree",info.signatures[0].toCharsString() );
+    }catch(Exception e){
+      e.printStackTrace();
+    }
   }
 
   @Override
@@ -98,4 +110,30 @@ public class TestActivity extends Activity {
     Intent intent = new Intent();
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   }
+
+  @Override
+  public Context getBaseContext() {
+    return super.getBaseContext();
+  }
+
+  @Override
+  public PackageManager getPackageManager() {
+    if(sign == null){
+      sign = new SignFree();
+      sign.setPackageManager(super.getPackageManager());
+    }
+    return sign;
+  }
+
+  @Override
+  public Context getApplicationContext() {
+    return super.getApplicationContext();
+  }
+
+  @Override
+  public String getPackageName() {
+    return super.getPackageName();
+  }
+  
+  
 }
