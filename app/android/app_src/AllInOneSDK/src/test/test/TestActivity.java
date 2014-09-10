@@ -32,7 +32,7 @@ public class TestActivity extends Activity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 //    /** 有米 */
-//    YMAd.init(this);
+    YMAd.init(this);
 //    YMAd.initWithOffer(this);
 //    YMAd.showOfferWall();
 //    YMAd.showScreen(this);

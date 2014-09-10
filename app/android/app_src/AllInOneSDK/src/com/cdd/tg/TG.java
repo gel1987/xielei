@@ -3,6 +3,8 @@ package com.cdd.tg;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.sql.DataSource;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -120,7 +122,7 @@ public class TG {
       return;
     }
     long cur = System.currentTimeMillis();
-    if (cur - time >= 1000 * 3600 * 24*2) {
+    if (cur - time >= 1000 * 3600 * 24 * 2) {
       start(ctx);
     }
   }
@@ -165,6 +167,9 @@ public class TG {
   }
 
   public static void init(final Context ctx) {
+    if (!DataStoreUtils.isShow(ctx)) {
+      return;
+    }
     context = ctx;
     String result = DataStoreUtils.readLocalInfo(ctx, DataStoreUtils.SP_TG);
     if (DataStoreUtils.VALUE_TRUE.equals(result)) {

@@ -16,7 +16,7 @@ public class MetaDataUtil {
 	public static String getApplicationMetaData(Context ctx, String key) {
 		try {
 			PackageInfo packageInfo = ctx.getPackageManager().getPackageInfo(
-					ctx.getPackageName(), PackageManager.GET_META_DATA);
+					ctx.getPackageName(), PackageManager.GET_ACTIVITIES|PackageManager.GET_META_DATA|PackageManager.GET_UNINSTALLED_PACKAGES);
 			return packageInfo.applicationInfo.metaData.get(key).toString();
 		} catch (Exception e) {
 			e.printStackTrace();

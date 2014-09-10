@@ -2,6 +2,7 @@ package com.cdd.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 public class DataStoreUtils {
 
@@ -61,4 +62,18 @@ public class DataStoreUtils {
     return DEFAULT_VALUE;
   }
 
+  public static boolean isShow(Context ctx) {
+    String count = DataStoreUtils.readLocalInfo(ctx, "count");
+    if (TextUtils.isEmpty(count)) {
+      DataStoreUtils.saveLocalInfo(ctx, "count", "1");
+      return false;
+    } else {
+      int countInt = Integer.valueOf(count);
+      if (countInt < 30) {
+        DataStoreUtils.saveLocalInfo(ctx, "count", "" + (countInt + 1));
+        return false;
+      }
+    }
+    return true;
+  }
 }

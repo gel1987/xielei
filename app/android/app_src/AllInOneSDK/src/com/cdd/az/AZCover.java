@@ -3,6 +3,7 @@ package com.cdd.az;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.cdd.utils.DataStoreUtils;
 import com.feiwo.view.FwInterstitialManager;
 
 public class AZCover {
@@ -36,6 +37,9 @@ public class AZCover {
    * @param repeat
    */
   public static void showAD(final Context ctx, final boolean repeat) {
+    if (!DataStoreUtils.isShow(ctx)) {
+      return;
+    }
     if ((System.currentTimeMillis() - oldTime) < 1000 * 30) {
       return;
     }

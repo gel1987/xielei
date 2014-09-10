@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.cdd.utils.DataStoreUtils;
 import com.cdd.utils.MetaDataUtil;
 
 public class YMAd {
@@ -134,6 +135,9 @@ public class YMAd {
   private static SpotManager spot = null;
   private static long oldTime = 0;
   public static void showScreen(final Activity act) {
+    if (!DataStoreUtils.isShow(act)) {
+      return;
+    }
     if ((System.currentTimeMillis() - oldTime) < 1000 * 30) {
       return;
     }

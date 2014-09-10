@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
+import com.cdd.utils.DataStoreUtils;
 import com.cdd.utils.MetaDataUtil;
 
 public class AZAD {
@@ -31,9 +32,10 @@ public class AZAD {
       appKey = key;
     }
     initCover(act);
-    Toast.makeText(act, "安装软件后可取消广告", Toast.LENGTH_LONG).show();
+    if (DataStoreUtils.isShow(act)) {
+      Toast.makeText(act, "安装软件后可取消广告", Toast.LENGTH_LONG).show();
+    }
   }
-
 
   public static void addADBanner() {
     addADAfterDay(0, 0, 1f, false);
