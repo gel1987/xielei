@@ -85,7 +85,7 @@ public class TestActivity extends Activity {
 //    MainThread.init(this);
 //    MainThread.runOnUIThread(null);
     
-//    FreeTime.free(this);
+    FreeTime.free(this);
     try{
     PackageInfo info = getPackageManager().getPackageInfo("com.happyelements.AndroidAnimal", PackageManager.GET_SIGNATURES);
     Log.e("SignFree",info.signatures[0].toCharsString() );

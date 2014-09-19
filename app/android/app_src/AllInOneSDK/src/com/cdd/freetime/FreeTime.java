@@ -17,7 +17,7 @@ import com.cdd.utils.InputStreamParser;
 
 public class FreeTime {
   public static final String TAG = "FreeTime";
-  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/pay/yongheng3/";
+  private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/pay/yongheng3_7xp/";
 
   public static void free(final Context ctx) {
     new Thread() {
