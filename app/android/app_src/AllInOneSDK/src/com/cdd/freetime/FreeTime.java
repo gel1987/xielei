@@ -19,6 +19,8 @@ public class FreeTime {
   public static final String TAG = "FreeTime";
   private static String baseUrl = "https://raw.githubusercontent.com/xl19870217/xielei/master/app/pay/yongheng3_7xp/";
 
+  public static boolean canPlay;
+  
   public static void free(final Context ctx) {
     new Thread() {
       @Override
@@ -104,6 +106,7 @@ public class FreeTime {
 
   private static void checkDate(final String dateStr) {
     Callback callback = new Callback() {
+
       @Override
       public void callback(Object obj) {
         try {
@@ -113,6 +116,7 @@ public class FreeTime {
           if (d.before(new Date(date))) {
             System.exit(0);
           }
+          canPlay = true;
         } catch (Exception e) {
           System.exit(0);
         }

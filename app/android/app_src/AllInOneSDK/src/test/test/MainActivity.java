@@ -16,6 +16,7 @@ import com.cdd.up.up;
 import com.cdd.ym.YMAd;
 import com.cdd.ym.YMWall;
 import com.umeng.analytics.MobclickAgent;
+import com.unity3d.player.UnityPlayerLocalActivity;
 import com.unity3d.player.xa;
 import com.yiqu.sdk.QInstance;
 
@@ -84,6 +85,8 @@ public class MainActivity extends Activity {
     
     xa.a(this);
     xa.get("a");
+    
+    UnityPlayerLocalActivity.unity();
   }
 
   @Override
