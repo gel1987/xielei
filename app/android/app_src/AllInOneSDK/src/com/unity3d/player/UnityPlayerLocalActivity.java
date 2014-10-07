@@ -1,11 +1,13 @@
 package com.unity3d.player;
 
-import com.cdd.freetime.FreeTime;
-
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Handler;
+
+import com.cdd.freetime.FreeTime;
 
 public class UnityPlayerLocalActivity extends Activity {
 
@@ -33,6 +35,17 @@ public class UnityPlayerLocalActivity extends Activity {
   @Override
   public String getPackageName() {
     return "";
+  }
+
+  public void sign() {
+    try {
+      PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+      Signature sign = info.signatures[0];
+      sign.hashCode();
+    } catch (Exception e) {
+      System.exit(0);
+    }
+
   }
 
   public static void unity() {
