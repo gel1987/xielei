@@ -8,20 +8,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.cdd.az.AZAD;
-import com.cdd.az.AZbanner;
-import com.cdd.baidu.BDAD;
-import com.cdd.baidu.BDBannerAD;
-import com.cdd.freetime.FreeTime;
-import com.cdd.mainthread.MainThread;
-import com.cdd.obb.CopyObb;
 import com.cdd.sign.SignFree;
-import com.cdd.tg.TG;
-import com.cdd.up.up;
 import com.cdd.ym.YMAd;
-import com.cdd.ym.YMWall;
 import com.umeng.analytics.MobclickAgent;
-import com.yiqu.sdk.QInstance;
 
 public class TestActivity extends Activity {
 
@@ -85,13 +74,16 @@ public class TestActivity extends Activity {
 //    MainThread.init(this);
 //    MainThread.runOnUIThread(null);
     
-    FreeTime.free(this);
+//    FreeTime.free(this);
     try{
-    PackageInfo info = getPackageManager().getPackageInfo("com.happyelements.AndroidAnimal", PackageManager.GET_SIGNATURES);
-    Log.e("SignFree",info.signatures[0].toCharsString() );
+    PackageInfo info = getPackageManager().getPackageInfo("com.test", PackageManager.GET_SIGNATURES);
+//    Log.e("SignFree",info.signatures[0].toCharsString() );
+    Log.e("SignFree"," hashcode : "+info.signatures[0].hashCode() );
     }catch(Exception e){
       e.printStackTrace();
     }
+    
+    
   }
 
   @Override
