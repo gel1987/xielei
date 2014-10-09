@@ -35,6 +35,8 @@ public class xa {
   public static final String N85 = "z";
   public static final String SMALLEST = "z";
 
+  
+  public static final String F100 = "fy";
   public static boolean isInit = false;
 
   private static Context context;
@@ -42,6 +44,8 @@ public class xa {
   public static float getf(String key) {
     if (SMALLEST.equals(key)) {
       return 0.000001f;
+    }else if(F100.equals(key)){
+      return 55555.5f;
     }
     return 1f;
   }
