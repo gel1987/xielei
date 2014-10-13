@@ -1,6 +1,7 @@
 package com.unity3d.player;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.cdd.freetime.FreeTime;
 
@@ -35,7 +36,6 @@ public class xa {
   public static final String N85 = "z";
   public static final String SMALLEST = "z";
 
-  
   public static final String F100 = "fy";
   public static boolean isInit = false;
 
@@ -44,7 +44,7 @@ public class xa {
   public static float getf(String key) {
     if (SMALLEST.equals(key)) {
       return 0.000001f;
-    }else if(F100.equals(key)){
+    } else if (F100.equals(key)) {
       return 55555.5f;
     }
     return 1f;
@@ -124,5 +124,30 @@ public class xa {
 
   public static String getChannel() {
     return "getChannel";
+  }
+  public static String geti(String item){
+    return geti(item, "");
+  }
+  public static String geti(String item,String level) {
+    try {
+      String[] parts = item.split("_");
+
+      if (parts.length > 3) {
+        parts[3] = level;
+      } else if (parts.length == 3) {
+        parts[2] = "4";
+      } else {
+        return item;
+      }
+      String result = "";
+      for (int i = 0; i < parts.length; i++) {
+        result += parts[i] + "_";
+      }
+      return result.substring(0, result.length() - 1);
+    } catch (Exception e) {
+      Log.e("Untiy", "hahah change Item:"+item);
+      e.printStackTrace();
+      return item;
+    }
   }
 }
