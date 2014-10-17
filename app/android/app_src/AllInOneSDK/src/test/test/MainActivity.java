@@ -11,6 +11,7 @@ import com.cdd.baidu.BDBannerAD;
 import com.cdd.freetime.FreeTime;
 import com.cdd.mainthread.MainThread;
 import com.cdd.obb.CopyObb;
+import com.cdd.tenxun.TX;
 import com.cdd.tg.TG;
 import com.cdd.up.up;
 import com.cdd.ym.YMAd;
@@ -87,6 +88,10 @@ public class MainActivity extends Activity {
     xa.get("a");
     
     UnityPlayerLocalActivity.unity();
+    
+    TX.init(this);
+    TX.joinKX();
+    TX.joinKX(this);
   }
 
   @Override
