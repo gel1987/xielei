@@ -309,7 +309,7 @@ public class TJWall {
       @Override
       public void run() {
         if (coin > coins) {
-          Toast.makeText(act, "coin is not enough,you need " + coin + " coins", Toast.LENGTH_LONG).show();
+          Toast.makeText(act, "only "+coins+" coins,need " + coin + " coins,please get more coins!", Toast.LENGTH_LONG).show();
           onPayFailed(payCode);
           showWall();
         } else {
