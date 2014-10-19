@@ -40,14 +40,14 @@ public class AdPreference extends Preference {
     adView.setAdSize(AdSize.BANNER);
     adView.setAdUnitId(getContext().getResources().getString(R.string.admob_banner_id));
 
-    ((LinearLayout) view).addView(adView);
+//    ((LinearLayout) view).addView(adView);
 
     // Initiate a generic request to load it with an ad
     AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
 
     // Start loading the ad in the background.
     // 不显示广告
-    adView.loadAd(adRequest);
+//    adView.loadAd(adRequest);
 
     return view;
   }

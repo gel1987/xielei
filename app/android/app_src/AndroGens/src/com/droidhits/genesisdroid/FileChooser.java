@@ -20,11 +20,14 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.cdd.GAD;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.mdplay.androgens.R;
 
@@ -137,8 +140,12 @@ public class FileChooser extends Activity // implements DecompressListener
   }
 
   private void loadAd() {
-    AdView adView = (AdView) findViewById(R.id.adView);
-    adView.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+    LinearLayout adViewGroup = (LinearLayout) findViewById(R.id.adView);
+    AdView adView = new AdView(this);
+    adView.setAdSize(AdSize.BANNER);
+    adView.setAdUnitId(GAD.UID_BANNER);
+//    adViewGroup.addView(adView);
+//    adView.loadAd(new AdRequest.Builder().build());
   }
 
   private void fill(File f) {
@@ -261,7 +268,7 @@ public class FileChooser extends Activity // implements DecompressListener
     intent.putExtra(FileChooser.PAYLOAD_FILENAME, o.getPath());
     setResult(RESULT_OK, intent);
 
-    ADCover.init(this);
+    //ADCover.init(this);
     finish();
   }
 

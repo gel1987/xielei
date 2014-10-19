@@ -9,8 +9,14 @@ import com.mdplay.androgens.R;
 
 public class ADCover {
   private static InterstitialAd interstitial;
+  private static long oldTime = 0;
 
   public static void init(Context ctx) {
+    if ((System.currentTimeMillis() - oldTime) < 1000 * 300) {
+      return;
+    }
+    
+    oldTime = System.currentTimeMillis();
     // 制作插页式广告。
     interstitial = new InterstitialAd(ctx);
     interstitial.setAdUnitId(ctx.getResources().getString(R.string.admob_cover_id));

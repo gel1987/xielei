@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 
 import com.cdd.up;
+import com.droidhits.genesisdroid.ADCover;
 import com.droidhits.genesisdroid.MainActivity;
 import com.droidhits.genesisdroid.Preferences;
 import com.tapjoy.TJWall;
@@ -22,6 +23,7 @@ public class Main extends MainActivity {
     super.onCreate(savedInstanceState);
     up.checkUp(this);
     TJWall.init(this);
+    ADCover.init(this);
     // unzipGames();
   }
 

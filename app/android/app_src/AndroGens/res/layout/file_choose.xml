@@ -30,17 +30,20 @@
 
         <RelativeLayout
             android:id="@+id/adViewWrap"
-                android:layout_above="@id/fileChooserSubmit"
-                android:layout_below="@id/fileChooserView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@id/fileChooserSubmit"
             android:layout_alignParentBottom="true"
+            android:layout_below="@id/fileChooserView"
             android:orientation="vertical" >
 
-            <com.google.android.gms.ads.AdView
+            <LinearLayout
                 android:id="@+id/adView"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:orientation="vertical" >
+            </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
 

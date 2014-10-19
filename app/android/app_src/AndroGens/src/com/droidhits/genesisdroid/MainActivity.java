@@ -21,9 +21,12 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.cdd.GAD;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.mdplay.androgens.R;
 
@@ -166,8 +169,12 @@ public class MainActivity extends Activity {
   }
 
   private void loadAd() {
-    AdView adView = (AdView) findViewById(R.id.adView);
-    adView.loadAd(new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
+    LinearLayout adViewGroup = (LinearLayout) findViewById(R.id.adView);
+    AdView adView = new AdView(this);
+    adView.setAdSize(AdSize.BANNER);
+    adView.setAdUnitId(GAD.UID_BANNER);
+//    adViewGroup.addView(adView);
+//    adView.loadAd(new AdRequest.Builder().build());
   }
 
   private void initGUIEvent() {
