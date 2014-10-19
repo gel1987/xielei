@@ -40,9 +40,7 @@
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/admob_banner_id" />
+                android:layout_height="wrap_content" />
         </RelativeLayout>
     </RelativeLayout>
 

@@ -37,9 +37,7 @@
             android:id="@+id/adView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/admob_banner_id" >
+            android:layout_weight="0">
         </com.google.android.gms.ads.AdView>
 
         <Button
