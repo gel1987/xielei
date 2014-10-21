@@ -1,8 +1,8 @@
-package com.cdd.pay.callback;
+package com.cdd.allpay.callback;
 
 import android.os.Message;
 
-import com.cdd.pay.PayMent;
+import com.cdd.allpay.PayMent;
 
 public abstract class HandlerCallback implements PayMent {
 

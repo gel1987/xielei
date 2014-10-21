@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.cdd.pay.util;
+package com.cdd.allpay.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;

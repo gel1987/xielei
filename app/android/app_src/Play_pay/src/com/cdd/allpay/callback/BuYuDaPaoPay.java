@@ -1,4 +1,4 @@
-package com.cdd.pay.callback;
+package com.cdd.allpay.callback;
 
 import java.util.ArrayList;
 import java.util.List;

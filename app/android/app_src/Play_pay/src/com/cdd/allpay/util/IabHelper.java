@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.cdd.pay.util;
+package com.cdd.allpay.util;
 
 import android.app.Activity;
 import android.app.PendingIntent;

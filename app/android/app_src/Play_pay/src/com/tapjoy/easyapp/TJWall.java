@@ -13,7 +13,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.cdd.pay.Pay;
+import com.cdd.allpay.Pay;
 import com.tapjoy.TapjoyAwardPointsNotifier;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyConnectFlag;

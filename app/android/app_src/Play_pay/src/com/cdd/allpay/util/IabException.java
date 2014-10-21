@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.cdd.pay.util;
+package com.cdd.allpay.util;
 
 /**
  * Exception thrown when something went wrong with in-app billing. An

@@ -1,4 +1,4 @@
-package com.cdd.pay;
+package com.cdd.allpay;
 
 import java.util.ArrayList;
 
@@ -8,12 +8,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.cdd.pay.callback.LeitingPay;
-import com.cdd.pay.util.IabHelper;
-import com.cdd.pay.util.IabResult;
-import com.cdd.pay.util.Inventory;
-import com.cdd.pay.util.Purchase;
-import com.cdd.pay.util.SkuDetails;
+import com.cdd.allpay.callback.LeitingPay;
+import com.cdd.allpay.util.IabHelper;
+import com.cdd.allpay.util.IabResult;
+import com.cdd.allpay.util.Inventory;
+import com.cdd.allpay.util.Purchase;
+import com.cdd.allpay.util.SkuDetails;
 
 public class DlgPay extends Activity {
 

@@ -1,4 +1,4 @@
-package com.cdd.pay.util;
+package com.cdd.allpay.util;
 
 import android.util.Log;
 

@@ -52,7 +52,7 @@
         </activity>
         <!-- pay -->
         <activity
-            android:name="com.cdd.pay.Pay"
+            android:name="com.cdd.allpay.Pay"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         

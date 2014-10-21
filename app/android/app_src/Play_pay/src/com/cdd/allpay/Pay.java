@@ -1,4 +1,4 @@
-package com.cdd.pay;
+package com.cdd.allpay;
 
 import java.util.ArrayList;
 
@@ -10,12 +10,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.cdd.pay.callback.Leiting2014Pay;
-import com.cdd.pay.util.IabHelper;
-import com.cdd.pay.util.IabResult;
-import com.cdd.pay.util.Inventory;
-import com.cdd.pay.util.Purchase;
-import com.cdd.pay.util.SkuDetails;
+import com.cdd.allpay.callback.Leiting2014Pay;
+import com.cdd.allpay.util.IabHelper;
+import com.cdd.allpay.util.IabResult;
+import com.cdd.allpay.util.Inventory;
+import com.cdd.allpay.util.Purchase;
+import com.cdd.allpay.util.SkuDetails;
 import com.tapjoy.easyapp.TJWall;
 
 public class Pay extends Activity {

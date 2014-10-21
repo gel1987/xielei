@@ -1,4 +1,4 @@
-package com.cdd.pay.callback;
+package com.cdd.allpay.callback;
 
 
 /**

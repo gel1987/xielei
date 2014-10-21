@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.cdd.pay.util;
+package com.cdd.allpay.util;
 
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;

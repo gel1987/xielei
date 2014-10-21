@@ -1,4 +1,4 @@
-package com.cdd.pay;
+package com.cdd.allpay;
 
 import android.os.Message;
 

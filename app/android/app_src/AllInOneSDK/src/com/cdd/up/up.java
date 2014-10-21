@@ -95,6 +95,7 @@ public class up {
         builder.show();
       }
     } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }

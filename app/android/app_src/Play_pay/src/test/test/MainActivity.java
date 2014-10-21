@@ -25,10 +25,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.cdd.pay.util.IabHelper;
-import com.cdd.pay.util.IabResult;
-import com.cdd.pay.util.Inventory;
-import com.cdd.pay.util.Purchase;
+import com.cdd.allpay.util.IabHelper;
+import com.cdd.allpay.util.IabResult;
+import com.cdd.allpay.util.Inventory;
+import com.cdd.allpay.util.Purchase;
 
 /**
  * Example game using in-app billing version 3.

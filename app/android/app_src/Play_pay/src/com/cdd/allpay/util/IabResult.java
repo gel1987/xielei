@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.cdd.pay.util;
+package com.cdd.allpay.util;
 
 /**
  * Represents the result of an in-app billing operation. A result is composed of
