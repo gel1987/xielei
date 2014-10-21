@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.cdd.allpay.Pay;
-import com.tapjoy.easyapp.TJWall;
+import com.cdd.tapjoy.TJWall;
 
 public class A extends Activity {
 

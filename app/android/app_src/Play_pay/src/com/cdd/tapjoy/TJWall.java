@@ -1,4 +1,4 @@
-package com.tapjoy.easyapp;
+package com.cdd.tapjoy;
 
 import java.util.Hashtable;
 

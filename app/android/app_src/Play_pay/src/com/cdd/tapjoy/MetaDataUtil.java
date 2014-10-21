@@ -1,4 +1,4 @@
-package com.tapjoy.easyapp;
+package com.cdd.tapjoy;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

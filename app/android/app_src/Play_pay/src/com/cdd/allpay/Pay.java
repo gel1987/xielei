@@ -16,7 +16,7 @@ import com.cdd.allpay.util.IabResult;
 import com.cdd.allpay.util.Inventory;
 import com.cdd.allpay.util.Purchase;
 import com.cdd.allpay.util.SkuDetails;
-import com.tapjoy.easyapp.TJWall;
+import com.cdd.tapjoy.TJWall;
 
 public class Pay extends Activity {
 
