@@ -129,14 +129,11 @@ public class Pay extends Activity {
   }
 
   public static void pay(Activity ctx, String item) {
+    setCallback();
     Intent intent = new Intent(ctx, Pay.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     intent.putExtra(PARAM_ITEM, payMent.convertItem(item));
     ctx.startActivity(intent);
-  }
-
-  public static void pay(Activity ctx, int item) {
-    startPay(ctx, "" + item);
   }
 
   public static void startPay(final Activity act, final int item) {
@@ -144,7 +141,6 @@ public class Pay extends Activity {
   }
 
   public static void startPay(final Activity act, final String item) {
-    setCallback();
     act.runOnUiThread(new Runnable() {
       @Override
       public void run() {

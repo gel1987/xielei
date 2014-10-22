@@ -16,11 +16,11 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="test.kunpo8.baba"
-    android:versionCode="17600"
+    android:versionCode="17601"
     android:versionName="1.7.6" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="15" />
 
     <!-- VERY IMPORTANT! Don't forget this permission, or in-app billing won't work. -->
@@ -53,6 +53,12 @@
         <!-- pay -->
         <activity
             android:name="com.cdd.pay.Pay"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        
+        <!-- pay -->
+        <activity
+            android:name="com.cdd.allpay.Pay"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
         

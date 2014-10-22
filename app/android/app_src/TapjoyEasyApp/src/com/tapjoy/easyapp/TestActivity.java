@@ -16,7 +16,7 @@ public class TestActivity extends Activity implements OnClickListener {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    TJWall.init(this);
+     TJWall.initInstace(this);
 
     spendPoints = (Button) findViewById(R.id.SpendPointsButton);
     spendPoints.setOnClickListener(this);

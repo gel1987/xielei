@@ -1,4 +1,4 @@
-package com.gad;
+package com.cdd.admob;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
   @Override
   public void onBackPressed() {
     ExitDialog.exit(this);
-//    ExitDialog.rate(this);
+    ExitDialog.rate(this);
   }
 
 }

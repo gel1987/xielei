@@ -1,4 +1,4 @@
-package com.gad;
+package com.cdd.admob;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -22,7 +22,7 @@ public class GAD {
 
   public static void showCover(Activity ctx) {
     if ((System.currentTimeMillis() - oldTime) > 1000 * 180) {
-      ADCover.init(ctx, true);
+      ADCover.init(ctx);
       oldTime = System.currentTimeMillis();
     }
   }

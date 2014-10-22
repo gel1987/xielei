@@ -1,4 +1,4 @@
-package com.gad;
+package com.cdd.admob;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,9 +16,9 @@ public class ADCover {
   }
   
   @SuppressLint("SimpleDateFormat")
-  public static void init(final Context ctx ,boolean alwaysShowAd) {
+  public static void init(final Context ctx) {
     String cover_d = DataStoreUtils.readLocalInfo(ctx, "cover_d");
-    if (TextUtils.isEmpty(cover_d) && !alwaysShowAd) {
+    if (TextUtils.isEmpty(cover_d)) {
       try {
         String str = MetaDataUtil.getApplicationMetaData(ctx, "cover_d");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

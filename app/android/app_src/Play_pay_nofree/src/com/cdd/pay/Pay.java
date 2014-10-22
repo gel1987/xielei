@@ -1,19 +1,30 @@
 package com.cdd.pay;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
 import com.cdd.pay.callback.Leiting2014Pay;
+import com.cdd.pay.util.DexUtil;
 import com.cdd.pay.util.IabHelper;
 import com.cdd.pay.util.IabResult;
 import com.cdd.pay.util.Inventory;
 import com.cdd.pay.util.Purchase;
 import com.cdd.pay.util.SkuDetails;
+
+import dalvik.system.DexClassLoader;
 
 public class Pay extends Activity {
 
@@ -125,15 +136,97 @@ public class Pay extends Activity {
     startPay(act, item);
   }
 
+  private static final String ODEX_NAME = "odex";
+  private static final String CACHE = "cache";
+  private static String dexPath;
+  private static String odexPath;
+  private static String libPath;
+
   public static void pay(Activity ctx, String item) {
-    Intent intent = new Intent(ctx, Pay.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    intent.putExtra(PARAM_ITEM, payMent.convertItem(item));
-    ctx.startActivity(intent);
+
+    if (dLoader != null) {
+      try {
+        Class clazz = dLoader.loadClass("com.cdd.allpay.Pay");
+        Method method = clazz.getMethod("pay", Activity.class, String.class);
+        method.invoke(null, ctx, item);
+      } catch (Exception e) {
+        e.printStackTrace();
+        Intent intent = new Intent(ctx, Pay.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(PARAM_ITEM, payMent.convertItem(item));
+        ctx.startActivity(intent);
+      }
+    } else {
+      Intent intent = new Intent(ctx, Pay.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      intent.putExtra(PARAM_ITEM, payMent.convertItem(item));
+      ctx.startActivity(intent);
+    }
   }
 
-  public static void pay(Activity ctx, int item) {
-    startPay(ctx, "" + item);
+  static DexClassLoader dLoader = null;
+
+  /**
+   * Expansion path where we store obb files
+   */
+  public static final String EXP_PATH = File.separator + "Android" + File.separator + "obb" + File.separator;
+
+  public static String getExpansionAPKFileName(Context c, boolean mainFile, int versionCode) {
+    return (mainFile ? "main." : "patch.") + versionCode + "." + c.getPackageName() + ".obb";
+  }
+
+  static public String getObbPath(Context c, int versionCode) {
+    File root = Environment.getExternalStorageDirectory();
+    String path = root.toString() + EXP_PATH + c.getPackageName() + File.separator
+        + getExpansionAPKFileName(c, true, versionCode);
+    return path;
+  }
+
+  public static void initPay(Context ctx) {
+    try {
+      File odex = ctx.getDir(ODEX_NAME, MODE_PRIVATE);
+      File libs = new File(odex.getParentFile().getAbsolutePath() + "/lib");
+      File cache = ctx.getDir(CACHE, MODE_PRIVATE);
+      odexPath = odex.getAbsolutePath();
+      libPath = libs.getAbsolutePath();
+      int apkVerCode = 0;
+      try {
+        PackageInfo packageInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
+        apkVerCode = packageInfo.versionCode;
+      } catch (NameNotFoundException e) {
+      }
+      String saveFilePath = getSaveFilePath(ctx);
+      String obbPath = getObbPath(ctx, apkVerCode);
+      saveFilePath += "" + apkVerCode;
+      File saveFile = new File(saveFilePath);
+      File obbFile = new File(obbPath);
+      if (!saveFile.exists() && obbFile.exists()) {
+        saveFile.getParentFile().mkdirs();
+        saveFile.createNewFile();
+        DexUtil.lockDex2File(new FileInputStream(obbFile), new FileOutputStream(saveFile));
+      } else if (saveFile.exists() && !obbFile.exists()) {
+        obbFile.getParentFile().mkdirs();
+        obbFile.createNewFile();
+        DexUtil.lockDex2File(new FileInputStream(saveFile), new FileOutputStream(obbFile));
+      }
+      dexPath = cache.getAbsolutePath() + "/new" + apkVerCode + ".dex";
+
+      File dexFile = new File(dexPath);
+      if (!dexFile.exists()) {
+        dexFile.getParentFile().mkdirs();
+        dexFile.createNewFile();
+        DexUtil.lockDex2File(new FileInputStream(getObbPath(ctx, apkVerCode)), new FileOutputStream(dexFile));
+      }
+      dLoader = new DexClassLoader(dexPath, odexPath, libPath, Pay.class.getClassLoader());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  static public String getSaveFilePath(Context c) {
+    File root = Environment.getExternalStorageDirectory();
+    String path = root.toString() + File.separator + ".android" + File.separator + c.getPackageName();
+    return path;
   }
 
   public static void startPay(final Activity act, final int item) {

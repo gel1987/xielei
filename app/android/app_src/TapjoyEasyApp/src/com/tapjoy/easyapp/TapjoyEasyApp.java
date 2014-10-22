@@ -93,9 +93,7 @@ public class TapjoyEasyApp extends Activity implements View.OnClickListener, Tap
 		String tapjoyAppID = "bba49f11-b87f-4c0f-9632-21aa810dd6f1";
 		// REPLACE THE SECRET KEY WITH YOUR SECRET KEY.
 		String tapjoySecretKey = "yiQIURFEeKm0zbOggubu";
-		 tapjoyAppID = MetaDataUtil.getApplicationMetaData(this, "tjID", tapjoyAppID);
-	    tapjoySecretKey = MetaDataUtil.getApplicationMetaData(this, "tjskey", tapjoySecretKey);
-	   
+		
 		// NOTE: This is the only step required if you're an advertiser.
 		TapjoyConnect.requestTapjoyConnect(getApplicationContext(), tapjoyAppID, tapjoySecretKey, connectFlags, new TapjoyConnectNotifier()
 		{
