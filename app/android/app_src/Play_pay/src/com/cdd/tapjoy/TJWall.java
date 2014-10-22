@@ -8,25 +8,30 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.cdd.allpay.Pay;
+import com.tapjoy.TJError;
+import com.tapjoy.TJEvent;
+import com.tapjoy.TJEventCallback;
+import com.tapjoy.TJEventPreloadStatus;
+import com.tapjoy.TJEventRequest;
 import com.tapjoy.TapjoyAwardPointsNotifier;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyConnectFlag;
 import com.tapjoy.TapjoyConnectNotifier;
 import com.tapjoy.TapjoyDisplayAdNotifier;
 import com.tapjoy.TapjoyEarnedPointsNotifier;
-import com.tapjoy.TapjoyFullScreenAdNotifier;
 import com.tapjoy.TapjoyNotifier;
 import com.tapjoy.TapjoyOffersNotifier;
 import com.tapjoy.TapjoySpendPointsNotifier;
+import com.tapjoy.TapjoyVideoNotifier;
 import com.tapjoy.TapjoyViewNotifier;
 
-public class TJWall {
+public class TJWall implements TapjoyNotifier, TJEventCallback {
 
   protected static final String TAG = "TJWall";
 
@@ -43,15 +48,44 @@ public class TJWall {
   private static String tapjoyAppID = "56a7ca02-7237-4a18-817d-5d8d2ca4047a";
   private static String tapjoySecretKey = "K52MeFhINWNcUv0bOIM3";
 
-  public static void init(Activity activity) {
+  private static TJEvent directPlayEvent;
+  private static boolean dpEventContentIsAvailable;
+  private static TJWall instance = null;
+
+  public static void initInstace(final Activity activity) {
+    instance = new TJWall();
+    new Thread() {
+      @Override
+      public void run() {
+        try {
+          Thread.sleep(15000);
+        } catch (Exception e) {
+        }
+        instance.init(activity);
+      }
+    }.start();
+  }
+
+  public static void setShowBanner() {
+    isAddBanner = true;
+  }
+
+  public static void setHideVideo() {
+    isShowVideo = false;
+  }
+
+  private TJWall() {
+  }
+
+  public void init(Activity activity) {
     act = activity;
 
     // Enables logging to the console.
     // TapjoyLog.enableLogging(true);
 
     // OPTIONAL: For custom startup flags.
-    Hashtable<String, String> flags = new Hashtable<String, String>();
-    flags.put(TapjoyConnectFlag.ENABLE_LOGGING, "true");
+    Hashtable<String, String> connectFlags = new Hashtable<String, String>();
+    connectFlags.put(TapjoyConnectFlag.ENABLE_LOGGING, "true");
     // Connect with the Tapjoy server. Call this when the application first
     // starts.
     // REPLACE THE APP ID WITH YOUR TAPJOY APP ID.
@@ -59,22 +93,87 @@ public class TJWall {
     tapjoyAppID = MetaDataUtil.getApplicationMetaData(activity, "tjID", tapjoyAppID);
     tapjoySecretKey = MetaDataUtil.getApplicationMetaData(activity, "tjskey", tapjoySecretKey);
     // NOTE: This is the only step required if you're an advertiser.
-    TapjoyConnect.requestTapjoyConnect(act, tapjoyAppID, tapjoySecretKey, flags, new TapjoyConnectNotifier() {
-      @Override
-      public void connectSuccess() {
-        Log.e(TAG, " connectSuccess ");
-        onConnectSuccess();
-      }
 
-      @Override
-      public void connectFail() {
-        Log.e(TAG, " connectFail ");
-      }
-    });
+    TapjoyConnect.requestTapjoyConnect(act.getApplicationContext(), tapjoyAppID, tapjoySecretKey, connectFlags,
+        new TapjoyConnectNotifier() {
+          @Override
+          public void connectSuccess() {
+            onConnectSuccess();
+          }
+
+          @Override
+          public void connectFail() {
+            Log.e(TAG, "Tapjoy connect call failed.");
+          }
+        });
 
   }
 
-  public static void onConnectSuccess() {
+  public void onConnectSuccess() {
+    // NOTE: The get/spend/awardTapPoints methods will only work if your virtual
+    // currency
+    // is managed by Tapjoy.
+    //
+    // For NON-MANAGED virtual currency,
+    // TapjoyConnect.getTapjoyConnectInsance().setUserID(...)
+    // must be called after requestTapjoyConnect.
+
+    // Start preloading your TJEvent content as soon as possible
+    directPlayEvent = new TJEvent(act, "video_unit", this);
+    directPlayEvent.enablePreload(true);
+    directPlayEvent.send();
+
+    // Get notifications when Tapjoy views open or close.
+    TapjoyConnect.getTapjoyConnectInstance().setTapjoyViewNotifier(new TapjoyViewNotifier() {
+      @Override
+      public void viewWillOpen(int viewType) {
+        Log.i(TAG, "viewWillOpen  did open");
+      }
+
+      @Override
+      public void viewWillClose(int viewType) {
+        Log.i(TAG, "viewWillClose  did open");
+      }
+
+      @Override
+      public void viewDidOpen(int viewType) {
+        Log.i(TAG, "viewDidOpen  did open");
+      }
+
+      @Override
+      public void viewDidClose(int viewType) {
+        Log.i(TAG, "viewDidClose  did open");
+
+        // Best Practice: We recommend calling getTapPoints as often as possible
+        // so the user�s balance is always up-to-date.
+        TapjoyConnect.getTapjoyConnectInstance().getTapPoints(TJWall.this);
+      }
+    });
+
+    // Get notifications on video start, complete and error
+    TapjoyConnect.getTapjoyConnectInstance().setVideoNotifier(new TapjoyVideoNotifier() {
+
+      @Override
+      public void videoStart() {
+        Log.i(TAG, "video has started");
+      }
+
+      @Override
+      public void videoError(int statusCode) {
+        Log.i(TAG, "there was an error with the video: " + statusCode);
+      }
+
+      @Override
+      public void videoComplete() {
+        Log.i(TAG, "video has completed");
+
+        // Best Practice: We recommend calling getTapPoints as often as possible
+        // so the user�s balance is always up-to-date.
+        TapjoyConnect.getTapjoyConnectInstance().getTapPoints(TJWall.this);
+      }
+
+    });
+
     // NOTE: The get/spend/awardTapPoints methods will only work if your virtual
     // currency
     // is managed by Tapjoy.
@@ -84,7 +183,7 @@ public class TJWall {
     // must be called after requestTapjoyConnect.
     if (0 == SPUtils.getIntValue(act, "tjinit")) {
       // 赠送5金币
-      TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(5, new TapjoyAwardPointsNotifier() {
+      TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(15, new TapjoyAwardPointsNotifier() {
         @Override
         public void getAwardPointsResponseFailed(String arg0) {
         }
@@ -104,43 +203,6 @@ public class TJWall {
       }
     });
 
-    // Get notifications when Tapjoy views open or close.
-    TapjoyConnect.getTapjoyConnectInstance().setTapjoyViewNotifier(new TapjoyViewNotifier() {
-      @Override
-      public void viewWillOpen(int viewType) {
-        Log.e(TAG, "viewWillOpen Sucess!");
-      }
-
-      @Override
-      public void viewWillClose(int viewType) {
-        Log.e(TAG, "viewWillClose Sucess!");
-      }
-
-      @Override
-      public void viewDidOpen(int viewType) {
-        Log.e(TAG, "viewDidOpen Sucess!");
-      }
-
-      @Override
-      public void viewDidClose(int viewType) {
-        Log.e(TAG, "viewDidClose Sucess!");
-      }
-    });
-
-    TapjoyConnect.getTapjoyConnectInstance().getTapPoints(new TapjoyNotifier() {
-      @Override
-      public void getUpdatePointsFailed(String error) {
-      }
-
-      @Override
-      public void getUpdatePoints(String currencyName, int pointTotal) {
-        Log.i(TAG, "currencyName: " + currencyName);
-        Log.i(TAG, "pointTotal: " + pointTotal);
-        coins = pointTotal;
-      }
-    });
-
-    showCover();
     if (isAddBanner) {
       showBanner();
     }
@@ -154,17 +216,20 @@ public class TJWall {
     handler.post(new Runnable() {
       @Override
       public void run() {
-        // Show the Offers web view from where users can download the latest
-        // offers for virtual currency.
-        TapjoyConnect.getTapjoyConnectInstance().showOffers(new TapjoyOffersNotifier() {
-          @Override
-          public void getOffersResponse() {
-          }
+        try {
+          // Show the Offers web view from where users can download the latest
+          // offers for virtual currency.
+          TapjoyConnect.getTapjoyConnectInstance().showOffers(new TapjoyOffersNotifier() {
+            @Override
+            public void getOffersResponse() {
+            }
 
-          @Override
-          public void getOffersResponseFailed(String error) {
-          }
-        });
+            @Override
+            public void getOffersResponseFailed(String error) {
+            }
+          });
+        } catch (Exception e) {
+        }
       }
     });
   }
@@ -256,21 +321,43 @@ public class TJWall {
     return adView;
   }
 
-  public static void showCover() {
-    // Show the full screen ad.
-    TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(new TapjoyFullScreenAdNotifier() {
-      @Override
-      public void getFullScreenAdResponseFailed(int error) {
-        Log.e(TAG, "showCover Error! " + error);
-      }
+  private static boolean isShowVideo = true;
 
-      @Override
-      public void getFullScreenAdResponse() {
-        Log.e(TAG, "showCover Sucess!");
-        TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();
+  public static void showCover() {
+    if (!isShowVideo) {
+      return;
+    }
+    // Check if content is available and if it is ready to show
+    if (dpEventContentIsAvailable) {
+      if (directPlayEvent.isContentReady()) {
+        directPlayEvent.showContent();
+      } else {
+        // not ready
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            showCover();
+          }
+        }, 3000);
       }
-    });
+    } else {
+      // dp not available
+      handler.postDelayed(new Runnable() {
+        @Override
+        public void run() {
+          if (count > 3) {
+            return;
+          }
+          count++;
+          directPlayEvent = new TJEvent(act, "video_unit", instance);
+          directPlayEvent.enablePreload(true);
+          directPlayEvent.send();
+        }
+      }, 10000);
+    }
   }
+
+  public static int count = 0;
 
   public static void spendCoin30(String payCode) {
     spendCoin(30, payCode);
@@ -309,7 +396,8 @@ public class TJWall {
       @Override
       public void run() {
         if (coin > coins) {
-          Toast.makeText(act, "only "+coins+" coins,need " + coin + " coins,please get more coins!", Toast.LENGTH_LONG).show();
+          Toast.makeText(act, "only " + coins + " coins,need " + coin + " coins,please get more!", Toast.LENGTH_LONG)
+              .show();
           onPayFailed(payCode);
           showWall();
         } else {
@@ -351,5 +439,69 @@ public class TJWall {
 
   private static void onPayFailed(String payCode) {
     Pay.payMent.onFailed(payCode);
+  }
+
+  // TJEventCallback Methods
+
+  @Override
+  public void sendEventCompleted(TJEvent event, boolean contentAvailable) {
+    // If content is not available you can note it here and act accordingly as
+    // best suited for your app
+    dpEventContentIsAvailable = contentAvailable;
+    showCover();
+    Log.i(TAG, "Tapjoy send event 'video_unit' completed, contentAvailable: " + contentAvailable);
+  }
+
+  @Override
+  public void sendEventFail(TJEvent event, TJError error) {
+    Log.i(TAG, "Tapjoy send event 'video_unit' failed with error: " + error.message);
+  }
+
+  @Override
+  public void contentIsReady(TJEvent event, int status) {
+    Log.i(TAG, "Tapjoy direct play content is ready");
+    switch (status) {
+      case TJEventPreloadStatus.STATUS_PRELOAD_COMPLETE:
+        // handle partial load of cache
+        break;
+      case TJEventPreloadStatus.STATUS_PRELOAD_PARTIAL:
+        // Handle complete load of cache
+        break;
+      default:
+        // Should never get here
+    }
+  }
+
+  @Override
+  public void contentDidShow(TJEvent event) {
+    Log.i(TAG, "Tapjoy direct play content did show");
+  }
+
+  @Override
+  public void contentDidDisappear(TJEvent event) {
+    Log.i(TAG, "Tapjoy direct play content did disappear");
+
+    // Best Practice: We recommend calling getTapPoints as often as possible so
+    // the user's balance is always up-to-date.
+    TapjoyConnect.getTapjoyConnectInstance().getTapPoints(this);
+
+    // Begin preloading the next event after the previous one is dismissed
+    directPlayEvent = new TJEvent(act, "video_unit", this);
+    directPlayEvent.enablePreload(true);
+    directPlayEvent.send();
+  }
+
+  @Override
+  public void didRequestAction(TJEvent event, TJEventRequest request) {
+  }
+
+  @Override
+  public void getUpdatePointsFailed(String error) {
+    Log.e(TAG, "getUpdatePointsFailed :" + error);
+  }
+
+  @Override
+  public void getUpdatePoints(String currencyName, int pointTotal) {
+    coins = pointTotal;
   }
 }

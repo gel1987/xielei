@@ -53,12 +53,16 @@ public class TJWall implements TapjoyNotifier, TJEventCallback {
 
   public static void initInstace(final Activity activity) {
     instance = new TJWall();
-    handler.postDelayed(new Runnable() {
+    new Thread() {
       @Override
       public void run() {
+        try {
+          Thread.sleep(15000);
+        } catch (Exception e) {
+        }
         instance.init(activity);
       }
-    }, 20000);
+    }.start();
   }
 
   private TJWall() {
@@ -378,7 +382,8 @@ public class TJWall implements TapjoyNotifier, TJEventCallback {
       @Override
       public void run() {
         if (coin > coins) {
-          Toast.makeText(act, "only "+coins+" coins,need " + coin + " coins,please get more!", Toast.LENGTH_LONG).show();
+          Toast.makeText(act, "only " + coins + " coins,need " + coin + " coins,please get more!", Toast.LENGTH_LONG)
+              .show();
           onPayFailed(payCode);
           showWall();
         } else {
