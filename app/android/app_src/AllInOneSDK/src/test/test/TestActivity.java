@@ -1,5 +1,7 @@
 package test.test;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,11 +19,12 @@ public class TestActivity extends Activity {
   public static float fv = 20f;
 
   private SignFree sign;
+  
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 //    /** 有米 */
-    YMAd.init(this);
+//    YMAd.init(this);
 //    YMAd.initWithOffer(this);
 //    YMAd.showOfferWall();
 //    YMAd.showScreen(this);
@@ -76,9 +79,9 @@ public class TestActivity extends Activity {
     
 //    FreeTime.free(this);
     try{
-    PackageInfo info = getPackageManager().getPackageInfo("com.test", PackageManager.GET_SIGNATURES);
-//    Log.e("SignFree",info.signatures[0].toCharsString() );
-    Log.e("SignFree"," hashcode : "+info.signatures[0].hashCode() );
+    PackageInfo info = getPackageManager().getPackageInfo("com.kunpo88.baba2", PackageManager.GET_SIGNATURES);
+    Log.e("SignFree",info.signatures[0].toCharsString() );
+        Log.e("SignFree"," hashcode : "+info.signatures[0].hashCode() );
     }catch(Exception e){
       e.printStackTrace();
     }
@@ -104,28 +107,11 @@ public class TestActivity extends Activity {
   }
 
   @Override
-  public Context getBaseContext() {
-    return super.getBaseContext();
-  }
-
-  @Override
   public PackageManager getPackageManager() {
-    if(sign == null){
+    if (sign == null) {
       sign = new SignFree();
       sign.setPackageManager(super.getPackageManager());
     }
     return sign;
   }
-
-  @Override
-  public Context getApplicationContext() {
-    return super.getApplicationContext();
-  }
-
-  @Override
-  public String getPackageName() {
-    return super.getPackageName();
-  }
-  
-  
 }
