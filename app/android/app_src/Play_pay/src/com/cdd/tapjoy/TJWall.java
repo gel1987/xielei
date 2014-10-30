@@ -52,18 +52,16 @@ public class TJWall implements TapjoyNotifier, TJEventCallback {
   private static boolean dpEventContentIsAvailable;
   private static TJWall instance = null;
 
-  public static void initInstace(final Activity activity) {
-    instance = new TJWall();
-    new Thread() {
+  public static void initInstace() {
+    act.runOnUiThread(new Runnable() {
       @Override
       public void run() {
-        try {
-          Thread.sleep(15000);
-        } catch (Exception e) {
+        if (instance == null) {
+          instance = new TJWall();
+          instance.init();
         }
-        instance.init(activity);
       }
-    }.start();
+    });
   }
 
   public static void setShowBanner() {
@@ -77,9 +75,11 @@ public class TJWall implements TapjoyNotifier, TJEventCallback {
   private TJWall() {
   }
 
-  public void init(Activity activity) {
+  public static void setActivity(Activity activity) {
     act = activity;
+  }
 
+  public void init() {
     // Enables logging to the console.
     // TapjoyLog.enableLogging(true);
 
@@ -90,8 +90,8 @@ public class TJWall implements TapjoyNotifier, TJEventCallback {
     // starts.
     // REPLACE THE APP ID WITH YOUR TAPJOY APP ID.
     // REPLACE THE SECRET KEY WITH YOUR SECRET KEY.
-    tapjoyAppID = MetaDataUtil.getApplicationMetaData(activity, "tjID", tapjoyAppID);
-    tapjoySecretKey = MetaDataUtil.getApplicationMetaData(activity, "tjskey", tapjoySecretKey);
+    tapjoyAppID = MetaDataUtil.getApplicationMetaData(act, "tjID", tapjoyAppID);
+    tapjoySecretKey = MetaDataUtil.getApplicationMetaData(act, "tjskey", tapjoySecretKey);
     // NOTE: This is the only step required if you're an advertiser.
 
     TapjoyConnect.requestTapjoyConnect(act.getApplicationContext(), tapjoyAppID, tapjoySecretKey, connectFlags,
@@ -209,7 +209,11 @@ public class TJWall implements TapjoyNotifier, TJEventCallback {
   }
 
   public static void showWall() {
-    showWall(act);
+    if (instance == null) {
+      initInstace();
+    } else {
+      showWall(act);
+    }
   }
 
   public static void showWall(Context act) {

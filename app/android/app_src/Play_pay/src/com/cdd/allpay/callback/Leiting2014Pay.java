@@ -1,6 +1,5 @@
 package com.cdd.allpay.callback;
 
-
 /**
  * 雷霆战机
  * 
@@ -15,7 +14,11 @@ public class Leiting2014Pay extends NoHandlerCallback {
   }
 
   private int getPayCode(String item) {
-    return Integer.valueOf(item);
+    try {
+      return Integer.valueOf(item);
+    } catch (Exception e) {
+      return 1;
+    }
   }
 
   private void onPaySucess(int payCode) {

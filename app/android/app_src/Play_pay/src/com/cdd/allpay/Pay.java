@@ -119,6 +119,12 @@ public class Pay extends Activity {
 
   public static PayMent payMent = null;
 
+  public static Activity activity;
+
+  public static void setActivity(Activity act) {
+    activity = act;
+  }
+
   private static void setCallback() {
     payMent = new Leiting2014Pay();
   }

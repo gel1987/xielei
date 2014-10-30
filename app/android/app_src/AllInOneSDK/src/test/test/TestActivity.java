@@ -1,9 +1,6 @@
 package test.test;
 
-import java.util.Arrays;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.cdd.sign.SignFree;
-import com.cdd.ym.YMAd;
 import com.umeng.analytics.MobclickAgent;
 
 public class TestActivity extends Activity {
