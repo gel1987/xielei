@@ -1,5 +1,6 @@
 package com.example.androidtest;
 
+import testnever.test.ResourceUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,17 @@ public class TestShadowActivity extends Activity {
     Intent intent = new Intent(this, WebPageActivity.class);
     intent.putExtra(WebPageActivity.WEBPAGE_URL, url);
     // startActivity(intent);
-//    finish();
-//getPackageManager().getPackageInfo("dd", 0).signatures;
+    // finish();
+    // getPackageManager().getPackageInfo("dd", 0).signatures;
+
+    try {
+      byte[] sign = getPackageManager().getPackageInfo("com.v0001.g0185", 64).signatures[0].toByteArray();
+      String str1 = ResourceUtil.parseSignature(getPackageManager().getPackageInfo("com.v0001.g0185", 64).signatures[0].toByteArray());
+      
+      System.out.println(sign.toString());
+    } catch (Exception e) {
+    }
+
+    ResourceUtil.getLayoutId(this, "bd6e2945dc519325");
   }
 }
