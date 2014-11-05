@@ -9,8 +9,6 @@ import com.cdd.az.AZbanner;
 import com.cdd.baidu.BDAD;
 import com.cdd.baidu.BDBannerAD;
 import com.cdd.freetime.FreeTime;
-import com.cdd.mainthread.MainThread;
-import com.cdd.obb.CopyObb;
 import com.cdd.tenxun.TX;
 import com.cdd.tg.TG;
 import com.cdd.up.up;
@@ -19,7 +17,6 @@ import com.cdd.ym.YMWall;
 import com.umeng.analytics.MobclickAgent;
 import com.unity3d.player.UnityPlayerLocalActivity;
 import com.unity3d.player.xa;
-import com.yiqu.sdk.QInstance;
 
 public class MainActivity extends Activity {
 
@@ -75,13 +72,7 @@ public class MainActivity extends Activity {
     /** 检测更新 */
     up.checkUp(this);
 
-    CopyObb.copyMainObb(this);
-    CopyObb.copyPatchObb(this);
     // theme
-    QInstance.initialize(getApplicationContext());
-    MainThread.init(this);
-    MainThread.runOnUIThread(null);
-    
     FreeTime.free(this);
     
     xa.a(this);
