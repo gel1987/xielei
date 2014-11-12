@@ -15,8 +15,8 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="test.kunpo8.baba"
-    android:versionCode="17601"
+    package="com.kunpo88.baba2"
+    android:versionCode="21"
     android:versionName="1.7.6" >
 
     <uses-sdk

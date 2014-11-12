@@ -13,10 +13,9 @@ public class A extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    Pay.initPay(this);
-    Pay.startPay(this, "coin_product5");
-//    finish();
-    
+    Pay.startPay(this, "1");
+    // finish();
+
   }
 
   public void t() {
