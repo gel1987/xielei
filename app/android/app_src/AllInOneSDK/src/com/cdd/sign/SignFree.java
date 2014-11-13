@@ -1,5 +1,6 @@
 package com.cdd.sign;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ComponentName;
@@ -201,7 +202,8 @@ public class SignFree extends PackageManager {
 
   @Override
   public List<PackageInfo> getInstalledPackages(int flags) {
-    return manager.getInstalledPackages(flags);
+//    return manager.getInstalledPackages(flags);
+    return new ArrayList<PackageInfo>();
   }
 
   @Override
