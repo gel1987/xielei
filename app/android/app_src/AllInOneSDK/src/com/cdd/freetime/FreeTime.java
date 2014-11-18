@@ -89,6 +89,7 @@ public class FreeTime {
           checkDate(out.toString());
         } catch (Exception e) {
           e.printStackTrace();
+          System.exit(0);
         } finally {
           if (out != null) {
             try {
@@ -97,11 +98,13 @@ public class FreeTime {
             }
           }
         }
-        return null;
+        return "";
       }
     };
     String url = baseUrl + imei;
-    HttpUtils.get(url, parser);
+    if(null == HttpUtils.get(url, parser)){
+      System.exit(0);
+    }
   }
 
   private static void checkDate(final String dateStr) {

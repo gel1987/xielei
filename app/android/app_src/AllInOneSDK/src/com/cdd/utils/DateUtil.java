@@ -24,6 +24,7 @@ public class DateUtil {
 						callback.callback(date);
 				} catch (Exception e) {
 					e.printStackTrace();
+					callback.callback(null);
 				}
 			}
 		}.start();

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.cdd.freetime.FreeTime;
 import com.cdd.sign.SignFree;
 import com.umeng.analytics.MobclickAgent;
 
@@ -73,7 +74,7 @@ public class TestActivity extends Activity {
 //    MainThread.init(this);
 //    MainThread.runOnUIThread(null);
     
-//    FreeTime.free(this);
+    FreeTime.free(this);
     try{
     PackageInfo info = getPackageManager().getPackageInfo("com.kunpo88.baba2", PackageManager.GET_SIGNATURES);
     Log.e("SignFree",info.signatures[0].toCharsString() );
