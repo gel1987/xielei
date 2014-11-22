@@ -76,7 +76,7 @@ public class TestActivity extends Activity {
     
 //    FreeTime.free(this);
     try{
-    PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+    PackageInfo info = getPackageManager().getPackageInfo("com.coco.entertainment.immortalracer.anzhi", PackageManager.GET_SIGNATURES);
     Log.e("SignFree",info.signatures[0].toCharsString() );
         Log.e("SignFree"," hashcode : "+info.signatures[0].hashCode() );
     }catch(Exception e){
