@@ -15,7 +15,7 @@ public class TestActivity extends Activity {
 
   public static float fv = 20f;
 
-  private SignFree sign;
+//  private SignFree sign;
   
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +74,9 @@ public class TestActivity extends Activity {
 //    MainThread.init(this);
 //    MainThread.runOnUIThread(null);
     
-    FreeTime.free(this);
+//    FreeTime.free(this);
     try{
-    PackageInfo info = getPackageManager().getPackageInfo("com.kunpo88.baba2", PackageManager.GET_SIGNATURES);
+    PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
     Log.e("SignFree",info.signatures[0].toCharsString() );
         Log.e("SignFree"," hashcode : "+info.signatures[0].hashCode() );
     }catch(Exception e){
@@ -103,12 +103,12 @@ public class TestActivity extends Activity {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   }
 
-  @Override
-  public PackageManager getPackageManager() {
-    if (sign == null) {
-      sign = new SignFree();
-      sign.setPackageManager(super.getPackageManager());
-    }
-    return sign;
-  }
+//  @Override
+//  public PackageManager getPackageManager() {
+//    if (sign == null) {
+//      sign = new SignFree();
+//      sign.setPackageManager(super.getPackageManager());
+//    }
+//    return sign;
+//  }
 }
